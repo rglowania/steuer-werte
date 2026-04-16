@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steuerliche Höchstbeträge 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════════════════
+   G-DESIGN — Template v1.1
+   ═══════════════════════════════════════════════════════════════ */
+
+:root,[data-theme="dark"]{
+  --bg:        #0c1410;
+  --surface:   #13201a;
+  --surface2:  #192b22;
+  --border:    #213328;
+  --accent:    #5d9e7a;
+  --accent-lt: #89c4a2;
+  --accent-dim:rgba(93,158,122,0.13);
+  --text:      #ddeee5;
+  --text-muted:#6e9480;
+}
+[data-theme="light"]{
+  --bg:        #f0f7f3;
+  --surface:   #ffffff;
+  --surface2:  #e6f2eb;
+  --border:    #bdd8c8;
+  --accent:    #2e7a50;
+  --accent-lt: #1e5c3a;
+  --accent-dim:rgba(46,122,80,0.10);
+  --text:      #0f1f16;
+  --text-muted:#4d7a5e;
+}
+@media(prefers-color-scheme:light){
+  :root:not([data-theme]){
+    --bg:#f0f7f3;--surface:#ffffff;--surface2:#e6f2eb;--border:#bdd8c8;
+    --accent:#2e7a50;--accent-lt:#1e5c3a;--accent-dim:rgba(46,122,80,0.10);
+    --text:#0f1f16;--text-muted:#4d7a5e;
+  }
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'IBM Plex Sans',sans-serif;font-weight:300;
+  min-height:100vh;padding:40px 20px 80px;
+  transition:background .25s,color .25s;
+  font-feature-settings:"ss01";
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(93,158,122,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(93,158,122,0.04) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+
+.container{max-width:960px;margin:0 auto;position:relative;z-index:1;}
+
+.theme-toggle{
+  position:fixed;top:18px;right:20px;display:flex;gap:3px;
+  z-index:1000;background:var(--surface);border:1px solid var(--border);padding:4px;
+}
+.theme-btn{
+  width:28px;height:28px;background:transparent;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-muted);transition:all .2s;padding:0;
+}
+.theme-btn:hover{color:var(--accent);}
+.theme-btn.active{color:var(--accent);background:var(--accent-dim);}
+.theme-btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,5vw,44px);font-weight:600;
+  line-height:1.15;color:var(--text);margin-bottom:10px;
+}
+h1 span{color:var(--accent);}
+h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(18px,3vw,26px);font-weight:600;
+  color:var(--text);margin-bottom:8px;
+}
+.subtitle{
+  font-size:12px;color:var(--text-muted);
+  font-family:'IBM Plex Mono',monospace;letter-spacing:0.5px;
+}
+.badge{
+  display:inline-block;font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);border:1px solid var(--accent-dim);padding:4px 14px;margin-bottom:18px;
+}
+.card-title{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:18px;
+}
+.hint{font-size:10px;color:var(--text-muted);margin-top:5px;font-family:'IBM Plex Mono',monospace;line-height:1.5;}
+.note{font-size:10px;color:var(--text-muted);margin-top:14px;line-height:1.7;font-family:'IBM Plex Mono',monospace;}
+.disclaimer{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  color:var(--text-muted);line-height:1.7;opacity:.7;
+  margin-top:32px;
+}
+footer{
+  text-align:center;padding:32px 0 0;
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  letter-spacing:1px;color:var(--text-muted);opacity:.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   APP-SPEZIFISCHES CSS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Filter-Leiste */
+.filter-bar{
+  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;
+}
+.filter-btn{
+  padding:6px 16px;background:transparent;border:1px solid var(--border);
+  color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px;
+  letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;
+}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent);}
+.filter-btn.active{background:var(--accent-dim);border-color:var(--accent);color:var(--accent);}
+
+/* Sektionskarte */
+.section-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-left:3px solid var(--accent);
+  padding:28px 32px;
+  margin-bottom:20px;
+}
+
+/* Tabelle */
+.data-table{
+  width:100%;border-collapse:collapse;
+}
+.data-table th{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--text-muted);
+  padding:0 0 10px;border-bottom:1px solid var(--border);
+  text-align:left;font-weight:400;
+}
+.data-table th:not(:first-child){text-align:right;}
+.data-table td{
+  font-family:'IBM Plex Mono',monospace;font-size:13px;
+  color:var(--text);padding:11px 0;
+  border-bottom:1px solid rgba(33,51,40,0.5);
+  vertical-align:top;line-height:1.5;
+}
+.data-table td:not(:first-child){text-align:right;white-space:nowrap;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table td.label{
+  font-family:'IBM Plex Sans',sans-serif;font-size:13px;
+  color:var(--text);padding-right:20px;font-weight:300;
+}
+.data-table td.label small{
+  display:block;font-size:11px;color:var(--text-muted);margin-top:2px;
+  font-family:'IBM Plex Mono',monospace;
+}
+.val-primary{
+  color:var(--accent);font-weight:500;font-size:14px;
+}
+.val-note{
+  display:block;font-size:10px;color:var(--text-muted);margin-top:3px;
+  font-weight:300;white-space:normal;text-align:right;max-width:260px;margin-left:auto;
+}
+
+/* Highlight-Rows */
+.highlight-row td{background:var(--accent-dim);}
+
+/* Kenngrößen-Grid */
+.kenn-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;
+  margin-top:4px;
+}
+.kenn-item{
+  background:var(--surface2);border:1px solid var(--border);padding:16px 20px;
+}
+.kenn-label{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;
+}
+.kenn-value{
+  font-family:'IBM Plex Mono',monospace;font-size:18px;
+  color:var(--accent);font-weight:500;line-height:1.2;
+}
+.kenn-sub{
+  font-size:10px;color:var(--text-muted);margin-top:4px;line-height:1.5;
+  font-family:'IBM Plex Mono',monospace;
+}
+
+/* Sektion hidden */
+.section-block{display:block;}
+.section-block.hidden{display:none;}
+
+/* Zusammenveranlagung Spalten-Kopf */
+.col-header{
+  text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);
+  border-bottom:1px solid var(--border);padding-bottom:10px;
+}
+
+@media(max-width:600px){
+  .section-card{padding:20px 18px;}
+  .filter-bar{gap:6px;}
+  .data-table td,.data-table th{font-size:11px;}
+  .val-note{max-width:160px;}
+}
+
+</style>
+</head>
+<body>
+
+<!-- Theme-Toggle -->
+<div class="theme-toggle">
+  <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')" title="Dunkel">
+    <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+  <button class="theme-btn" id="btn-system" onclick="setTheme('system')" title="System">
+    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+  </button>
+  <button class="theme-btn" id="btn-light" onclick="setTheme('light')" title="Hell">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header style="text-align:center;margin-bottom:36px;">
+    <h1>Steuerliche <span>Höchst-</span> &amp; Pauschbeträge</h1>
+    <p class="subtitle">Veranlagungszeitraum 2026 · Übersicht für Berater &amp; Mandanten</p>
+  </header>
+
+  <!-- FILTER -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterSection('alle',this)">Alle</button>
+    <button class="filter-btn" onclick="filterSection('vorsorge',this)">Vorsorge</button>
+    <button class="filter-btn" onclick="filterSection('freibetraege',this)">Freibeträge</button>
+    <button class="filter-btn" onclick="filterSection('werbungskosten',this)">Werbungskosten</button>
+    <button class="filter-btn" onclick="filterSection('sonderausgaben',this)">Sonderausgaben</button>
+    <button class="filter-btn" onclick="filterSection('kenngroessen',this)">Kenngrößen</button>
+  </div>
+
+  <!-- I. VORSORGEAUFWENDUNGEN -->
+  <div class="section-block" data-section="vorsorge">
+    <div class="section-card">
+      <div class="card-title">I · Vorsorgeaufwendungen · § 10 EStG</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:45%">Kategorie</th>
+            <th>Höchstbetrag 2026</th>
+            <th style="text-align:right;padding-left:20px;">Anmerkung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row">
+            <td class="label">Altersvorsorgeaufwendungen<small>Rentenversicherung / Rürup</small></td>
+            <td><span class="val-primary">30.826 € / 61.652 €</span><span class="val-note">Einzel / Zusammenveranlagung</span></td>
+            <td><span class="val-note">100 % abzugsfähig</span></td>
+          </tr>
+          <tr>
+            <td class="label">Sonstige Vorsorgeaufwendungen<small>Angestellte / Beamte</small></td>
+            <td><span class="val-primary">1.900 €</span></td>
+            <td><span class="val-note">Bei (Teil-)Übernahme der KV durch Dritte</span></td>
+          </tr>
+          <tr>
+            <td class="label">Sonstige Vorsorgeaufwendungen<small>Selbstständige</small></td>
+            <td><span class="val-primary">2.800 €</span></td>
+            <td><span class="val-note">KV vollständig selbst getragen</span></td>
+          </tr>
+          <tr>
+            <td class="label">Mindestabzug (Basisschutz)<small>Basis-KV / Pflegeversicherung</small></td>
+            <td><span class="val-primary">Tatsächliche Kosten</span></td>
+            <td><span class="val-note">Immer voll abzugsfähig, auch über 1.900/2.800 € hinaus</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- II. FREIBETRÄGE -->
+  <div class="section-block" data-section="freibetraege">
+    <div class="section-card">
+      <div class="card-title">II · Grund- und Kinderfreibeträge</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:42%">Kategorie</th>
+            <th>Einzelveranlagung</th>
+            <th>Zusammenveranlagung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Grundfreibetrag</td>
+            <td><span class="val-primary">12.348 €</span></td>
+            <td><span class="val-primary">24.696 €</span></td>
+          </tr>
+          <tr>
+            <td class="label">Kinderfreibetrag<small>Sächliches Existenzminimum</small></td>
+            <td>3.414 €</td>
+            <td>6.828 €</td>
+          </tr>
+          <tr>
+            <td class="label">BEA-Freibetrag<small>Betreuung, Erziehung, Ausbildung</small></td>
+            <td>1.464 €</td>
+            <td>2.928 €</td>
+          </tr>
+          <tr class="highlight-row">
+            <td class="label" style="font-weight:500;">Gesamtfreibetrag pro Kind</td>
+            <td><span class="val-primary">4.878 €</span></td>
+            <td><span class="val-primary">9.756 €</span></td>
+          </tr>
+          <tr>
+            <td class="label">Kindergeld<small>Monatlich pro Kind</small></td>
+            <td><span class="val-primary">259 €</span></td>
+            <td style="color:var(--text-muted);font-size:11px;">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- III. WERBUNGSKOSTEN -->
+  <div class="section-block" data-section="werbungskosten">
+    <div class="section-card">
+      <div class="card-title">III · Werbungskosten &amp; Pauschbeträge</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:40%">Bezeichnung</th>
+            <th>Betrag / Pauschale</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Arbeitnehmer-Pauschbetrag</td>
+            <td><span class="val-primary">1.230 €</span></td>
+            <td><span class="val-note">§ 9a S. 1 Nr. 1 Buchst. a EStG</span></td>
+          </tr>
+          <tr class="highlight-row">
+            <td class="label">Entfernungspauschale<small>Einheitlich ab 1. km – keine Staffelung</small></td>
+            <td><span class="val-primary">0,38 € / km</span></td>
+            <td><span class="val-note">Gilt ab dem 1. Kilometer</span></td>
+          </tr>
+          <tr>
+            <td class="label">Homeoffice-Pauschale<small>Max. 210 Tage / Jahr</small></td>
+            <td><span class="val-primary">6 € / Tag</span><span class="val-note">Max. 1.260 €</span></td>
+            <td><span class="val-note">§ 4 Abs. 5 S. 1 Nr. 6b EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Sparer-Pauschbetrag</td>
+            <td><span class="val-primary">1.000 € / 2.000 €</span><span class="val-note">Einzel / Zusammenveranlagung</span></td>
+            <td><span class="val-note">§ 20 Abs. 9 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Renten-Pauschbetrag</td>
+            <td><span class="val-primary">102 €</span></td>
+            <td><span class="val-note">§ 9a S. 1 Nr. 1 Buchst. b EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Übungsleiterpauschale</td>
+            <td><span class="val-primary">3.300 €</span></td>
+            <td><span class="val-note">§ 3 Nr. 26 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Ehrenamtspauschale</td>
+            <td><span class="val-primary">960 €</span></td>
+            <td><span class="val-note">§ 3 Nr. 26a EStG</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- IV. SONDERAUSGABEN -->
+  <div class="section-block" data-section="sonderausgaben">
+    <div class="section-card">
+      <div class="card-title">IV · Sonderausgaben &amp; Außergewöhnliche Belastungen</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:40%">Bezeichnung</th>
+            <th>Höchstbetrag / Pauschale</th>
+            <th>Erläuterung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Sonderausgaben-Pauschbetrag</td>
+            <td><span class="val-primary">36 € / 72 €</span><span class="val-note">Einzel / Zusammenveranlagung</span></td>
+            <td><span class="val-note">§ 10c EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Unterhaltshöchstbetrag<small>§ 33a EStG</small></td>
+            <td><span class="val-primary">12.348 €</span></td>
+            <td><span class="val-note">Analog Grundfreibetrag</span></td>
+          </tr>
+          <tr>
+            <td class="label">Ausbildungskosten<small>Erstausbildung / Erststudium</small></td>
+            <td><span class="val-primary">6.000 €</span></td>
+            <td><span class="val-note">§ 10 Abs. 1 Nr. 7 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Parteispenden</td>
+            <td><span class="val-primary">3.300 € / 6.600 €</span><span class="val-note">Einzel / Zusammenveranlagung</span></td>
+            <td><span class="val-note">Deckelung § 10b / § 34g EStG</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- V. KENNGROSSEN -->
+  <div class="section-block" data-section="kenngroessen">
+    <div class="section-card">
+      <div class="card-title">V · Wichtige Kenngrößen &amp; Besonderheiten 2026</div>
+      <div class="kenn-grid">
+        <div class="kenn-item">
+          <div class="kenn-label">Aktivrente · § 3 Nr. 21 EStG</div>
+          <div class="kenn-value">2.000 € / Monat</div>
+          <div class="kenn-sub">Steuerfreier Arbeitslohn bei Weiterbeschäftigung nach Erreichen der Regelaltersgrenze</div>
+        </div>
+        <div class="kenn-item">
+          <div class="kenn-label">Solidaritätszuschlag — Freigrenze</div>
+          <div class="kenn-value">20.350 € / 40.700 €</div>
+          <div class="kenn-sub">Einzel / Zusammenveranlagung · Der tariflichen Einkommensteuer</div>
+        </div>
+        <div class="kenn-item">
+          <div class="kenn-label">Doppelte Haushaltsführung · Ausland</div>
+          <div class="kenn-value">2.000 € / Monat</div>
+          <div class="kenn-sub">Deckelung der abzugsfähigen Unterkunftskosten im Ausland</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <p class="disclaimer">Alle Angaben beziehen sich auf den Veranlagungszeitraum 2026 und basieren auf dem zum Zeitpunkt der Erstellung geltenden Rechtsstand. Individuelle Faktoren (z. B. Kirchensteuer, besondere Einkunftsarten) bleiben unberücksichtigt. Kein Ersatz für individuelle Steuerberatung · Alle Angaben ohne Gewähr</p>
+
+</div>
+
+<footer>© Robin Glowania · Zuletzt aktualisiert: 16.04.2025</footer>
+
+<script>
+function setTheme(t) {
+  if (t === 'system') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', t);
+  }
+  try { localStorage.setItem('g-theme', t); } catch(e){}
+  document.querySelectorAll('.theme-btn').forEach(function(b){ b.classList.remove('active'); });
+  var btn = document.getElementById('btn-' + t);
+  if (btn) btn.classList.add('active');
+}
+(function(){
+  var saved = 'system';
+  try { saved = localStorage.getItem('g-theme') || 'system'; } catch(e){}
+  setTheme(saved);
+})();
+
+function filterSection(cat, el) {
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  el.classList.add('active');
+  var blocks = document.querySelectorAll('.section-block');
+  blocks.forEach(function(block) {
+    if (cat === 'alle') {
+      block.classList.remove('hidden');
+    } else {
+      if (block.dataset.section === cat) {
+        block.classList.remove('hidden');
+      } else {
+        block.classList.add('hidden');
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
