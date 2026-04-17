@@ -316,12 +316,13 @@ footer{
             <td><span class="val-primary" data-val="kfb_gesamt_z">9.756 €</span></td>
           </tr>
           <tr>
-            <td class="label">Kindergeld<small>Monatlich pro Kind</small></td>
-            <td><span class="val-primary" data-val="kindergeld">259 €</span></td>
+            <td class="label">Kindergeld<small>Monatlich / jährlich pro Kind</small></td>
+            <td><span class="val-primary" data-val="kindergeld">259 €</span><span class="val-note" data-val="kindergeld_jahr">3.108 € / Jahr</span></td>
             <td style="color:var(--text-muted);font-size:11px;">—</td>
           </tr>
         </tbody>
       </table>
+      <p class="note" data-val="guenstiger_hint">Günstigerprüfung (§ 31 EStG) · Kinderfreibetrag wirkt sich aus ab ~32 % Grenzsteuersatz · ca. 50.000 € Brutto (SK I, ohne Sonderabzüge)</p>
     </div>
   </div>
 
@@ -502,6 +503,7 @@ var TAX_DATA = {
     kfb_gesamt_e: '4.878 €',
     kfb_gesamt_z: '9.756 €',
     kindergeld: '259 €',
+    kindergeld_jahr: '3.108 € / Jahr',
     entf: '0,38 € / km',
     entf_sub: 'Einheitlich ab 1. km – keine Staffelung',
     entf_note: 'Gilt ab dem 1. Kilometer',
@@ -513,6 +515,7 @@ var TAX_DATA = {
     soli: '20.350 € / 40.700 €',
     dhf_ausland: '2.000 € / Monat',
     dhf_ausland_sub: 'Deckelung der abzugsfähigen Unterkunftskosten im Ausland',
+    guenstiger_hint: 'Günstigerprüfung (§ 31 EStG) · Kinderfreibetrag wirkt sich aus ab ~32 % Grenzsteuersatz · ca. 50.000 € Brutto (SK I, ohne Sonderabzüge)',
   },
   2025: {
     verified: true,
@@ -525,6 +528,7 @@ var TAX_DATA = {
     kfb_gesamt_e: '4.800 €',
     kfb_gesamt_z: '9.600 €',
     kindergeld: '255 €',
+    kindergeld_jahr: '3.060 € / Jahr',
     entf: '0,30 € / 0,38 € / km',
     entf_sub: 'km 1–20 / ab km 21',
     entf_note: 'Staffelung: 0,30 € (km 1–20), 0,38 € (ab km 21)',
@@ -535,7 +539,8 @@ var TAX_DATA = {
     aktivrente_sub: 'Nicht anwendbar – gilt erst ab Veranlagungszeitraum 2026',
     soli: '19.950 € / 39.900 €',
     dhf_ausland: 'Keine Obergrenze',
-    dhf_ausland_sub: 'Kein fester Höchstbetrag – Angemessenheitsprüfung (vgl. BFH v. 9.8.2023)',
+    dhf_ausland_sub: 'Kein fester Höchstbetrag – Angemessenheitsprüfung; 60-qm-Regel des FA nicht anwendbar (BFH v. 9.8.2023, Az. VI R 30/21)',
+    guenstiger_hint: 'Günstigerprüfung (§ 31 EStG) · Kinderfreibetrag wirkt sich aus ab ~32 % Grenzsteuersatz · ca. 49.000 € Brutto (SK I, ohne Sonderabzüge)',
   },
   2024: {
     verified: true,
@@ -548,6 +553,7 @@ var TAX_DATA = {
     kfb_gesamt_e: '4.770 €',
     kfb_gesamt_z: '9.540 €',
     kindergeld: '250 €',
+    kindergeld_jahr: '3.000 € / Jahr',
     entf: '0,30 € / 0,38 € / km',
     entf_sub: 'km 1–20 / ab km 21',
     entf_note: 'Staffelung: 0,30 € (km 1–20), 0,38 € (ab km 21)',
@@ -558,7 +564,8 @@ var TAX_DATA = {
     aktivrente_sub: 'Nicht anwendbar – gilt erst ab Veranlagungszeitraum 2026',
     soli: '18.130 € / 36.260 €',
     dhf_ausland: 'Keine Obergrenze',
-    dhf_ausland_sub: 'Kein fester Höchstbetrag – Angemessenheitsprüfung (vgl. BFH v. 9.8.2023)',
+    dhf_ausland_sub: 'Kein fester Höchstbetrag – Angemessenheitsprüfung; 60-qm-Regel des FA nicht anwendbar (BFH v. 9.8.2023, Az. VI R 30/21)',
+    guenstiger_hint: 'Günstigerprüfung (§ 31 EStG) · Kinderfreibetrag wirkt sich aus ab ~32 % Grenzsteuersatz · ca. 48.000 € Brutto (SK I, ohne Sonderabzüge)',
   }
 };
 
