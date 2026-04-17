@@ -275,55 +275,17 @@ footer{
   <!-- FILTER -->
   <div class="filter-bar">
     <button class="filter-btn active" onclick="filterSection('alle',this)">Alle</button>
-    <button class="filter-btn" onclick="filterSection('vorsorge',this)">Vorsorge</button>
     <button class="filter-btn" onclick="filterSection('freibetraege',this)">Freibeträge</button>
     <button class="filter-btn" onclick="filterSection('werbungskosten',this)">Werbungskosten</button>
+    <button class="filter-btn" onclick="filterSection('vorsorge',this)">Vorsorge</button>
     <button class="filter-btn" onclick="filterSection('sonderausgaben',this)">Sonderausgaben</button>
     <button class="filter-btn" onclick="filterSection('kenngroessen',this)">Kenngrößen</button>
   </div>
 
-  <!-- I. VORSORGEAUFWENDUNGEN -->
-  <div class="section-block" data-section="vorsorge">
-    <div class="section-card">
-      <div class="card-title">I · Vorsorgeaufwendungen · § 10 EStG</div>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th style="width:45%">Kategorie</th>
-            <th>Höchstbetrag <span data-val="year">2026</span></th>
-            <th style="text-align:right;padding-left:20px;">Anmerkung</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="highlight-row">
-            <td class="label">Altersvorsorgeaufwendungen<small>Rentenversicherung / Rürup</small></td>
-            <td><span class="val-primary" data-val="altersvorsorge">30.826 € / 61.652 €</span><span class="val-note">Einzel / Zusammenveranlagung</span></td>
-            <td><span class="val-note">100 % abzugsfähig</span></td>
-          </tr>
-          <tr>
-            <td class="label">Sonstige Vorsorgeaufwendungen<small>Angestellte / Beamte</small></td>
-            <td><span class="val-primary">1.900 €</span></td>
-            <td><span class="val-note">Bei (Teil-)Übernahme der KV durch Dritte</span></td>
-          </tr>
-          <tr>
-            <td class="label">Sonstige Vorsorgeaufwendungen<small>Selbstständige</small></td>
-            <td><span class="val-primary">2.800 €</span></td>
-            <td><span class="val-note">KV vollständig selbst getragen</span></td>
-          </tr>
-          <tr>
-            <td class="label">Mindestabzug (Basisschutz)<small>Basis-KV / Pflegeversicherung</small></td>
-            <td><span class="val-primary">Tatsächliche Kosten</span></td>
-            <td><span class="val-note">Immer voll abzugsfähig, auch über 1.900/2.800 € hinaus</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- II. FREIBETRÄGE -->
+  <!-- I. FREIBETRÄGE -->
   <div class="section-block" data-section="freibetraege">
     <div class="section-card">
-      <div class="card-title">II · Grund- und Kinderfreibeträge</div>
+      <div class="card-title">I · Grund- und Kinderfreibeträge</div>
       <table class="data-table">
         <thead>
           <tr>
@@ -363,10 +325,10 @@ footer{
     </div>
   </div>
 
-  <!-- III. WERBUNGSKOSTEN -->
+  <!-- II. WERBUNGSKOSTEN -->
   <div class="section-block" data-section="werbungskosten">
     <div class="section-card">
-      <div class="card-title">III · Werbungskosten &amp; Pauschbeträge</div>
+      <div class="card-title">II · Werbungskosten &amp; Pauschbeträge</div>
       <table class="data-table">
         <thead>
           <tr>
@@ -410,6 +372,44 @@ footer{
             <td class="label">Ehrenamtspauschale</td>
             <td><span class="val-primary" data-val="ehrenamt">960 €</span></td>
             <td><span class="val-note">§ 3 Nr. 26a EStG</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- III. VORSORGEAUFWENDUNGEN -->
+  <div class="section-block" data-section="vorsorge">
+    <div class="section-card">
+      <div class="card-title">III · Vorsorgeaufwendungen · § 10 EStG</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:45%">Kategorie</th>
+            <th>Höchstbetrag <span data-val="year">2026</span></th>
+            <th style="text-align:right;padding-left:20px;">Anmerkung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row">
+            <td class="label">Altersvorsorgeaufwendungen<small>Rentenversicherung / Rürup</small></td>
+            <td><span class="val-primary" data-val="altersvorsorge">30.826 € / 61.652 €</span><span class="val-note">Einzel / Zusammenveranlagung</span></td>
+            <td><span class="val-note">100 % abzugsfähig</span></td>
+          </tr>
+          <tr>
+            <td class="label">Sonstige Vorsorgeaufwendungen<small>Angestellte / Beamte</small></td>
+            <td><span class="val-primary">1.900 €</span></td>
+            <td><span class="val-note">Bei (Teil-)Übernahme der KV durch Dritte</span></td>
+          </tr>
+          <tr>
+            <td class="label">Sonstige Vorsorgeaufwendungen<small>Selbstständige</small></td>
+            <td><span class="val-primary">2.800 €</span></td>
+            <td><span class="val-note">KV vollständig selbst getragen</span></td>
+          </tr>
+          <tr>
+            <td class="label">Mindestabzug (Basisschutz)<small>Basis-KV / Pflegeversicherung</small></td>
+            <td><span class="val-primary">Tatsächliche Kosten</span></td>
+            <td><span class="val-note">Immer voll abzugsfähig, auch über 1.900/2.800 € hinaus</span></td>
           </tr>
         </tbody>
       </table>
