@@ -472,7 +472,7 @@ footer{
         <div class="kenn-item">
           <div class="kenn-label">Doppelte Haushaltsführung · Ausland</div>
           <div class="kenn-value" data-val="dhf_ausland">2.000 € / Monat</div>
-          <div class="kenn-sub">Deckelung der abzugsfähigen Unterkunftskosten im Ausland</div>
+          <div class="kenn-sub" data-val="dhf_ausland_sub">Deckelung der abzugsfähigen Unterkunftskosten im Ausland</div>
         </div>
       </div>
     </div>
@@ -483,7 +483,7 @@ footer{
 
 </div>
 
-<footer>© Robin Glowania · Zuletzt aktualisiert: 16.04.2025</footer>
+<footer>© Robin Glowania · Zuletzt aktualisiert: 17.04.2026</footer>
 
 <script>
 /* ═══════════════════════════════════════════════════════════════
@@ -512,13 +512,14 @@ var TAX_DATA = {
     aktivrente_sub: 'Steuerfreier Arbeitslohn bei Weiterbeschäftigung nach Erreichen der Regelaltersgrenze',
     soli: '20.350 € / 40.700 €',
     dhf_ausland: '2.000 € / Monat',
+    dhf_ausland_sub: 'Deckelung der abzugsfähigen Unterkunftskosten im Ausland',
   },
   2025: {
-    verified: false,
+    verified: true,
     year: '2025',
     altersvorsorge: '29.344&thinsp;/&thinsp;58.688 €',
-    grundfreibetrag_e: '12.084 €',
-    grundfreibetrag_z: '24.168 €',
+    grundfreibetrag_e: '12.096 €',
+    grundfreibetrag_z: '24.192 €',
     kfb_e: '3.336 €',
     kfb_z: '6.672 €',
     kfb_gesamt_e: '4.800 €',
@@ -529,22 +530,23 @@ var TAX_DATA = {
     entf_note: 'Staffelung: 0,30 € (km 1–20), 0,38 € (ab km 21)',
     uebungsleiter: '3.000 €',
     ehrenamt: '840 €',
-    unterhalt: '12.084 €',
+    unterhalt: '12.096 €',
     aktivrente: '—',
-    aktivrente_sub: 'Bitte prüfen – ggf. noch nicht anwendbar',
-    soli: '19.245 € / 38.490 €',
-    dhf_ausland: '1.000 € / Monat',
+    aktivrente_sub: 'Nicht anwendbar – gilt erst ab Veranlagungszeitraum 2026',
+    soli: '19.950 € / 39.900 €',
+    dhf_ausland: 'Keine Obergrenze',
+    dhf_ausland_sub: 'Kein fester Höchstbetrag – Angemessenheitsprüfung (vgl. BFH v. 9.8.2023)',
   },
   2024: {
-    verified: false,
+    verified: true,
     year: '2024',
     altersvorsorge: '27.566&thinsp;/&thinsp;55.132 €',
     grundfreibetrag_e: '11.784 €',
     grundfreibetrag_z: '23.568 €',
-    kfb_e: '3.192 €',
-    kfb_z: '6.384 €',
-    kfb_gesamt_e: '4.656 €',
-    kfb_gesamt_z: '9.312 €',
+    kfb_e: '3.306 €',
+    kfb_z: '6.612 €',
+    kfb_gesamt_e: '4.770 €',
+    kfb_gesamt_z: '9.540 €',
     kindergeld: '250 €',
     entf: '0,30 € / 0,38 € / km',
     entf_sub: 'km 1–20 / ab km 21',
@@ -553,9 +555,10 @@ var TAX_DATA = {
     ehrenamt: '840 €',
     unterhalt: '11.784 €',
     aktivrente: '—',
-    aktivrente_sub: 'Bitte prüfen – ggf. noch nicht anwendbar',
+    aktivrente_sub: 'Nicht anwendbar – gilt erst ab Veranlagungszeitraum 2026',
     soli: '18.130 € / 36.260 €',
-    dhf_ausland: '1.000 € / Monat',
+    dhf_ausland: 'Keine Obergrenze',
+    dhf_ausland_sub: 'Kein fester Höchstbetrag – Angemessenheitsprüfung (vgl. BFH v. 9.8.2023)',
   }
 };
 
