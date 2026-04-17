@@ -1,0 +1,75 @@
+name: Monatliche Steuerwert-Prüfung
+
+on:
+  schedule:
+    # Jeden 1. des Monats um 08:00 Uhr UTC
+    - cron: '0 8 1 * *'
+  workflow_dispatch:
+
+jobs:
+  create-review-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - name: Prüfungs-Issue erstellen
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const now = new Date();
+            const year = now.getFullYear();
+            const months = [
+              'Januar','Februar','März','April','Mai','Juni',
+              'Juli','August','September','Oktober','November','Dezember'
+            ];
+            const month = months[now.getMonth()];
+
+            const years = [year, year - 1, year - 2];
+
+            const title = `Steuerwert-Prüfung ${month} ${year}`;
+
+            const body = [
+              '## Monatliche Prüfung der Steuerwerte',
+              '',
+              `Veranlagungszeiträume: **${years.join(', ')}**`,
+              '',
+              '### Zu prüfende Werte',
+              '',
+              '- [ ] Altersvorsorgeaufwendungen (§ 10 EStG)',
+              '- [ ] Grundfreibetrag',
+              '- [ ] Kinderfreibetrag (sächliches Existenzminimum)',
+              '- [ ] BEA-Freibetrag',
+              '- [ ] Kindergeld',
+              '- [ ] Arbeitnehmer-Pauschbetrag',
+              '- [ ] Entfernungspauschale',
+              '- [ ] Homeoffice-Pauschale',
+              '- [ ] Sparer-Pauschbetrag',
+              '- [ ] Übungsleiterpauschale (§ 3 Nr. 26 EStG)',
+              '- [ ] Ehrenamtspauschale (§ 3 Nr. 26a EStG)',
+              '- [ ] Unterhaltshöchstbetrag (§ 33a EStG)',
+              '- [ ] Soli-Freigrenze',
+              '- [ ] Aktivrente (§ 3 Nr. 21 EStG)',
+              '- [ ] Doppelte Haushaltsführung Ausland',
+              '',
+              '### Neues Jahr erkannt?',
+              '',
+              `Falls ${year} ein neues Veranlagungsjahr ist, das noch nicht in \`TAX_DATA\` (index.html) hinterlegt ist:`,
+              '',
+              '- [ ] Werte für das neue Jahr in `TAX_DATA` ergänzen',
+              '- [ ] `verified: true` setzen nach Freigabe',
+              '',
+              '### Nächste Schritte',
+              '',
+              '**Keine Änderungen nötig:** Issue einfach schließen.',
+              '',
+              '**Werte haben sich geändert:** Kommentar mit den korrekten Werten hinterlassen — ich aktualisiere `index.html` und schließe das Issue.',
+            ].join('\n');
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body,
+              labels: ['wertprüfung'],
+            });

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Steuerliche Höchstbeträge 2026</title>
+<title>Steuerliche Höchst- &amp; Pauschbeträge</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 
@@ -113,6 +113,33 @@ footer{
 /* ═══════════════════════════════════════════════════════════════
    APP-SPEZIFISCHES CSS
    ═══════════════════════════════════════════════════════════════ */
+
+/* Jahr-Umschalter */
+.year-bar{
+  display:flex;gap:0;margin-bottom:24px;width:fit-content;
+}
+.year-btn{
+  padding:7px 22px;background:transparent;
+  border:1px solid var(--border);border-right:none;
+  color:var(--text-muted);font-family:'IBM Plex Mono',monospace;
+  font-size:13px;letter-spacing:1px;cursor:pointer;transition:all .2s;
+}
+.year-btn:last-child{border-right:1px solid var(--border);}
+.year-btn:hover{border-color:var(--accent);color:var(--accent);z-index:1;position:relative;}
+.year-btn.active{
+  background:var(--accent-dim);border-color:var(--accent);
+  color:var(--accent);z-index:1;position:relative;
+}
+.year-btn.active + .year-btn{border-left-color:var(--accent);}
+
+/* Hinweis bei ungeprüften Jahreswerten */
+.unverified-notice{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  color:var(--text-muted);border:1px solid var(--border);
+  padding:8px 14px;margin-bottom:20px;line-height:1.7;letter-spacing:0.3px;
+  border-left:3px solid var(--accent);
+}
+.unverified-notice.hidden{display:none;}
 
 /* Filter-Leiste */
 .filter-bar{
@@ -234,8 +261,16 @@ footer{
   <!-- HEADER -->
   <header style="text-align:center;margin-bottom:36px;">
     <h1>Steuerliche <span>Höchst-</span> &amp; Pauschbeträge</h1>
-    <p class="subtitle">Veranlagungszeitraum 2026 · Übersicht für Berater &amp; Mandanten</p>
+    <p class="subtitle"><span id="vz-subtitle">Veranlagungszeitraum 2026</span> · Übersicht für Berater &amp; Mandanten</p>
   </header>
+
+  <!-- JAHR-UMSCHALTER -->
+  <div class="year-bar" id="year-bar"><!-- wird per JS gerendert --></div>
+
+  <!-- HINWEIS BEI UNGEPRÜFTEN WERTEN -->
+  <div class="unverified-notice hidden" id="unverified-notice">
+    Hinweis: Die Werte für dieses Veranlagungsjahr wurden noch nicht vollständig geprüft und sind vorläufige Schätzungen. Bitte vor Verwendung verifizieren.
+  </div>
 
   <!-- FILTER -->
   <div class="filter-bar">
@@ -255,14 +290,14 @@ footer{
         <thead>
           <tr>
             <th style="width:45%">Kategorie</th>
-            <th>Höchstbetrag 2026</th>
+            <th>Höchstbetrag <span data-val="year">2026</span></th>
             <th style="text-align:right;padding-left:20px;">Anmerkung</th>
           </tr>
         </thead>
         <tbody>
           <tr class="highlight-row">
             <td class="label">Altersvorsorgeaufwendungen<small>Rentenversicherung / Rürup</small></td>
-            <td><span class="val-primary">30.826 € / 61.652 €</span><span class="val-note">Einzel / Zusammenveranlagung</span></td>
+            <td><span class="val-primary" data-val="altersvorsorge">30.826 € / 61.652 €</span><span class="val-note">Einzel / Zusammenveranlagung</span></td>
             <td><span class="val-note">100 % abzugsfähig</span></td>
           </tr>
           <tr>
@@ -300,13 +335,13 @@ footer{
         <tbody>
           <tr>
             <td class="label">Grundfreibetrag</td>
-            <td><span class="val-primary">12.348 €</span></td>
-            <td><span class="val-primary">24.696 €</span></td>
+            <td><span class="val-primary" data-val="grundfreibetrag_e">12.348 €</span></td>
+            <td><span class="val-primary" data-val="grundfreibetrag_z">24.696 €</span></td>
           </tr>
           <tr>
             <td class="label">Kinderfreibetrag<small>Sächliches Existenzminimum</small></td>
-            <td>3.414 €</td>
-            <td>6.828 €</td>
+            <td><span data-val="kfb_e">3.414 €</span></td>
+            <td><span data-val="kfb_z">6.828 €</span></td>
           </tr>
           <tr>
             <td class="label">BEA-Freibetrag<small>Betreuung, Erziehung, Ausbildung</small></td>
@@ -315,12 +350,12 @@ footer{
           </tr>
           <tr class="highlight-row">
             <td class="label" style="font-weight:500;">Gesamtfreibetrag pro Kind</td>
-            <td><span class="val-primary">4.878 €</span></td>
-            <td><span class="val-primary">9.756 €</span></td>
+            <td><span class="val-primary" data-val="kfb_gesamt_e">4.878 €</span></td>
+            <td><span class="val-primary" data-val="kfb_gesamt_z">9.756 €</span></td>
           </tr>
           <tr>
             <td class="label">Kindergeld<small>Monatlich pro Kind</small></td>
-            <td><span class="val-primary">259 €</span></td>
+            <td><span class="val-primary" data-val="kindergeld">259 €</span></td>
             <td style="color:var(--text-muted);font-size:11px;">—</td>
           </tr>
         </tbody>
@@ -347,9 +382,9 @@ footer{
             <td><span class="val-note">§ 9a S. 1 Nr. 1 Buchst. a EStG</span></td>
           </tr>
           <tr class="highlight-row">
-            <td class="label">Entfernungspauschale<small>Einheitlich ab 1. km – keine Staffelung</small></td>
-            <td><span class="val-primary">0,38 € / km</span></td>
-            <td><span class="val-note">Gilt ab dem 1. Kilometer</span></td>
+            <td class="label">Entfernungspauschale<small data-val="entf_sub">Einheitlich ab 1. km – keine Staffelung</small></td>
+            <td><span class="val-primary" data-val="entf">0,38 € / km</span></td>
+            <td><span class="val-note" data-val="entf_note">Gilt ab dem 1. Kilometer</span></td>
           </tr>
           <tr>
             <td class="label">Homeoffice-Pauschale<small>Max. 210 Tage / Jahr</small></td>
@@ -368,12 +403,12 @@ footer{
           </tr>
           <tr>
             <td class="label">Übungsleiterpauschale</td>
-            <td><span class="val-primary">3.300 €</span></td>
+            <td><span class="val-primary" data-val="uebungsleiter">3.300 €</span></td>
             <td><span class="val-note">§ 3 Nr. 26 EStG</span></td>
           </tr>
           <tr>
             <td class="label">Ehrenamtspauschale</td>
-            <td><span class="val-primary">960 €</span></td>
+            <td><span class="val-primary" data-val="ehrenamt">960 €</span></td>
             <td><span class="val-note">§ 3 Nr. 26a EStG</span></td>
           </tr>
         </tbody>
@@ -401,7 +436,7 @@ footer{
           </tr>
           <tr>
             <td class="label">Unterhaltshöchstbetrag<small>§ 33a EStG</small></td>
-            <td><span class="val-primary">12.348 €</span></td>
+            <td><span class="val-primary" data-val="unterhalt">12.348 €</span></td>
             <td><span class="val-note">Analog Grundfreibetrag</span></td>
           </tr>
           <tr>
@@ -422,21 +457,21 @@ footer{
   <!-- V. KENNGROSSEN -->
   <div class="section-block" data-section="kenngroessen">
     <div class="section-card">
-      <div class="card-title">V · Wichtige Kenngrößen &amp; Besonderheiten 2026</div>
+      <div class="card-title">V · Wichtige Kenngrößen &amp; Besonderheiten <span data-val="year">2026</span></div>
       <div class="kenn-grid">
         <div class="kenn-item">
           <div class="kenn-label">Aktivrente · § 3 Nr. 21 EStG</div>
-          <div class="kenn-value">2.000 € / Monat</div>
-          <div class="kenn-sub">Steuerfreier Arbeitslohn bei Weiterbeschäftigung nach Erreichen der Regelaltersgrenze</div>
+          <div class="kenn-value" data-val="aktivrente">2.000 € / Monat</div>
+          <div class="kenn-sub" data-val="aktivrente_sub">Steuerfreier Arbeitslohn bei Weiterbeschäftigung nach Erreichen der Regelaltersgrenze</div>
         </div>
         <div class="kenn-item">
           <div class="kenn-label">Solidaritätszuschlag — Freigrenze</div>
-          <div class="kenn-value">20.350 € / 40.700 €</div>
+          <div class="kenn-value" data-val="soli">20.350 € / 40.700 €</div>
           <div class="kenn-sub">Einzel / Zusammenveranlagung · Der tariflichen Einkommensteuer</div>
         </div>
         <div class="kenn-item">
           <div class="kenn-label">Doppelte Haushaltsführung · Ausland</div>
-          <div class="kenn-value">2.000 € / Monat</div>
+          <div class="kenn-value" data-val="dhf_ausland">2.000 € / Monat</div>
           <div class="kenn-sub">Deckelung der abzugsfähigen Unterkunftskosten im Ausland</div>
         </div>
       </div>
@@ -444,13 +479,147 @@ footer{
   </div>
 
   <!-- DISCLAIMER -->
-  <p class="disclaimer">Alle Angaben beziehen sich auf den Veranlagungszeitraum 2026 und basieren auf dem zum Zeitpunkt der Erstellung geltenden Rechtsstand. Individuelle Faktoren (z. B. Kirchensteuer, besondere Einkunftsarten) bleiben unberücksichtigt. Kein Ersatz für individuelle Steuerberatung · Alle Angaben ohne Gewähr</p>
+  <p class="disclaimer">Alle Angaben beziehen sich auf den Veranlagungszeitraum <span data-val="year">2026</span> und basieren auf dem zum Zeitpunkt der Erstellung geltenden Rechtsstand. Individuelle Faktoren (z. B. Kirchensteuer, besondere Einkunftsarten) bleiben unberücksichtigt. Kein Ersatz für individuelle Steuerberatung · Alle Angaben ohne Gewähr</p>
 
 </div>
 
 <footer>© Robin Glowania · Zuletzt aktualisiert: 16.04.2025</footer>
 
 <script>
+/* ═══════════════════════════════════════════════════════════════
+   STEUERDATEN PRO VERANLAGUNGSJAHR
+   verified: true = vom Nutzer geprüft und freigegeben
+   ═══════════════════════════════════════════════════════════════ */
+var TAX_DATA = {
+  2026: {
+    verified: true,
+    year: '2026',
+    altersvorsorge: '30.826&thinsp;/&thinsp;61.652 €',
+    grundfreibetrag_e: '12.348 €',
+    grundfreibetrag_z: '24.696 €',
+    kfb_e: '3.414 €',
+    kfb_z: '6.828 €',
+    kfb_gesamt_e: '4.878 €',
+    kfb_gesamt_z: '9.756 €',
+    kindergeld: '259 €',
+    entf: '0,38 € / km',
+    entf_sub: 'Einheitlich ab 1. km – keine Staffelung',
+    entf_note: 'Gilt ab dem 1. Kilometer',
+    uebungsleiter: '3.300 €',
+    ehrenamt: '960 €',
+    unterhalt: '12.348 €',
+    aktivrente: '2.000 € / Monat',
+    aktivrente_sub: 'Steuerfreier Arbeitslohn bei Weiterbeschäftigung nach Erreichen der Regelaltersgrenze',
+    soli: '20.350 € / 40.700 €',
+    dhf_ausland: '2.000 € / Monat',
+  },
+  2025: {
+    verified: false,
+    year: '2025',
+    altersvorsorge: '29.344&thinsp;/&thinsp;58.688 €',
+    grundfreibetrag_e: '12.084 €',
+    grundfreibetrag_z: '24.168 €',
+    kfb_e: '3.336 €',
+    kfb_z: '6.672 €',
+    kfb_gesamt_e: '4.800 €',
+    kfb_gesamt_z: '9.600 €',
+    kindergeld: '255 €',
+    entf: '0,30 € / 0,38 € / km',
+    entf_sub: 'km 1–20 / ab km 21',
+    entf_note: 'Staffelung: 0,30 € (km 1–20), 0,38 € (ab km 21)',
+    uebungsleiter: '3.000 €',
+    ehrenamt: '840 €',
+    unterhalt: '12.084 €',
+    aktivrente: '—',
+    aktivrente_sub: 'Bitte prüfen – ggf. noch nicht anwendbar',
+    soli: '19.245 € / 38.490 €',
+    dhf_ausland: '1.000 € / Monat',
+  },
+  2024: {
+    verified: false,
+    year: '2024',
+    altersvorsorge: '27.566&thinsp;/&thinsp;55.132 €',
+    grundfreibetrag_e: '11.784 €',
+    grundfreibetrag_z: '23.568 €',
+    kfb_e: '3.192 €',
+    kfb_z: '6.384 €',
+    kfb_gesamt_e: '4.656 €',
+    kfb_gesamt_z: '9.312 €',
+    kindergeld: '250 €',
+    entf: '0,30 € / 0,38 € / km',
+    entf_sub: 'km 1–20 / ab km 21',
+    entf_note: 'Staffelung: 0,30 € (km 1–20), 0,38 € (ab km 21)',
+    uebungsleiter: '3.000 €',
+    ehrenamt: '840 €',
+    unterhalt: '11.784 €',
+    aktivrente: '—',
+    aktivrente_sub: 'Bitte prüfen – ggf. noch nicht anwendbar',
+    soli: '18.130 € / 36.260 €',
+    dhf_ausland: '1.000 € / Monat',
+  }
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   JAHRES-UMSCHALTER
+   ═══════════════════════════════════════════════════════════════ */
+function getDisplayYears() {
+  var y = new Date().getFullYear();
+  return [y, y - 1, y - 2];
+}
+
+function renderYearBar() {
+  var years = getDisplayYears();
+  var bar = document.getElementById('year-bar');
+  bar.innerHTML = years.map(function(y) {
+    return '<button class="year-btn" id="year-btn-' + y + '" onclick="switchYear(' + y + ')">' + y + '</button>';
+  }).join('');
+}
+
+function switchYear(year) {
+  var data = TAX_DATA[year];
+
+  if (!data) {
+    // Jahr noch nicht hinterlegt
+    document.getElementById('unverified-notice').textContent =
+      'Für das Jahr ' + year + ' sind noch keine Daten hinterlegt. Bitte TAX_DATA in index.html ergänzen.';
+    document.getElementById('unverified-notice').classList.remove('hidden');
+    document.querySelectorAll('.year-btn').forEach(function(b) { b.classList.remove('active'); });
+    var btn = document.getElementById('year-btn-' + year);
+    if (btn) btn.classList.add('active');
+    return;
+  }
+
+  // Alle data-val-Elemente aktualisieren
+  document.querySelectorAll('[data-val]').forEach(function(el) {
+    var key = el.dataset.val;
+    if (data[key] !== undefined) {
+      el.innerHTML = data[key];
+    }
+  });
+
+  // Subtitle aktualisieren
+  document.getElementById('vz-subtitle').textContent = 'Veranlagungszeitraum ' + year;
+
+  // Aktiver Jahr-Button
+  document.querySelectorAll('.year-btn').forEach(function(b) { b.classList.remove('active'); });
+  var activeBtn = document.getElementById('year-btn-' + year);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  // Hinweis bei ungeprüften Werten
+  var notice = document.getElementById('unverified-notice');
+  if (data.verified) {
+    notice.classList.add('hidden');
+  } else {
+    notice.textContent = 'Hinweis: Die Werte für ' + year + ' wurden noch nicht vollständig geprüft und sind vorläufige Schätzungen. Bitte vor Verwendung verifizieren.';
+    notice.classList.remove('hidden');
+  }
+
+  try { localStorage.setItem('selected-year', year); } catch(e) {}
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME
+   ═══════════════════════════════════════════════════════════════ */
 function setTheme(t) {
   if (t === 'system') {
     document.documentElement.removeAttribute('data-theme');
@@ -462,12 +631,10 @@ function setTheme(t) {
   var btn = document.getElementById('btn-' + t);
   if (btn) btn.classList.add('active');
 }
-(function(){
-  var saved = 'system';
-  try { saved = localStorage.getItem('g-theme') || 'system'; } catch(e){}
-  setTheme(saved);
-})();
 
+/* ═══════════════════════════════════════════════════════════════
+   FILTER
+   ═══════════════════════════════════════════════════════════════ */
 function filterSection(cat, el) {
   document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
   el.classList.add('active');
@@ -484,6 +651,23 @@ function filterSection(cat, el) {
     }
   });
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════════════════ */
+(function() {
+  var saved = 'system';
+  try { saved = localStorage.getItem('g-theme') || 'system'; } catch(e){}
+  setTheme(saved);
+
+  renderYearBar();
+
+  var years = getDisplayYears();
+  var savedYear = null;
+  try { savedYear = parseInt(localStorage.getItem('selected-year')); } catch(e) {}
+  var initialYear = (savedYear && years.indexOf(savedYear) !== -1) ? savedYear : years[0];
+  switchYear(initialYear);
+})();
 </script>
 </body>
 </html>
