@@ -312,6 +312,7 @@ footer{
     <button class="steuerart-btn" id="steuerart-btn-ust" onclick="switchSteuerart('ust',this)">Umsatzsteuer</button>
     <button class="steuerart-btn" id="steuerart-btn-kst" onclick="switchSteuerart('kst',this)">Körperschaftsteuer</button>
     <button class="steuerart-btn" id="steuerart-btn-gewst" onclick="switchSteuerart('gewst',this)">Gewerbesteuer</button>
+    <button class="steuerart-btn" id="steuerart-btn-ao" onclick="switchSteuerart('ao',this)">Abgabenordnung</button>
   </div>
 
   <!-- HINWEIS BEI UNGEPRÜFTEN WERTEN -->
@@ -361,6 +362,14 @@ footer{
     <button class="filter-btn" onclick="filterSection('gewst-grundwerte',this)">Grundwerte</button>
     <button class="filter-btn" onclick="filterSection('gewst-hinzurechnung',this)">Hinzurechnungen</button>
     <button class="filter-btn" onclick="filterSection('gewst-kuerzung',this)">Kürzungen</button>
+  </div>
+
+  <!-- FILTER · AO -->
+  <div class="filter-bar hidden" data-steuerart="ao">
+    <button class="filter-btn active" onclick="filterSection('alle',this)">Alle</button>
+    <button class="filter-btn" onclick="filterSection('ao-zinsen',this)">Zinsen</button>
+    <button class="filter-btn" onclick="filterSection('ao-verspaetung',this)">Verspätungszuschlag</button>
+    <button class="filter-btn" onclick="filterSection('ao-saeuumnis',this)">Säumniszuschlag</button>
   </div>
 
   <!-- I. FREIBETRÄGE -->
@@ -445,6 +454,16 @@ footer{
             <td><span class="val-primary">1.000 € / 2.000 €</span><span class="val-note">Einzel / Zusammenveranlagung</span></td>
             <td><span class="val-note">§ 20 Abs. 9 EStG</span></td>
           </tr>
+          <tr>
+            <td class="label">Doppelte Haushaltsführung — Inland<small>Max. abzugsfähige Unterkunftskosten</small></td>
+            <td><span class="val-primary">1.000 € / Monat</span></td>
+            <td><span class="val-note">§ 9 Abs. 1 S. 3 Nr. 5 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Doppelte Haushaltsführung — Ausland<small data-val="dhf_ausland_sub">Deckelung der abzugsfähigen Unterkunftskosten im Ausland</small></td>
+            <td><span class="val-primary" data-val="dhf_ausland">2.000 € / Monat</span></td>
+            <td><span class="val-note">§ 9 Abs. 1 S. 3 Nr. 5a EStG</span></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -526,6 +545,80 @@ footer{
     </div>
   </div>
 
+  <!-- IV b. BEHINDERTENPAUSCHBETRAEGE -->
+  <div class="section-block" data-steuerart="est" data-section="sonderausgaben">
+    <div class="section-card">
+      <div class="card-title">IV b · Behindertenpauschbeträge · § 33b EStG</div>
+      <table class="data-table keep-all-cols">
+        <thead>
+          <tr>
+            <th style="width:50%">Grad der Behinderung (GdB)</th>
+            <th>Jahres-Pauschbetrag</th>
+            <th>Hinweis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">GdB 20</td>
+            <td><span class="val-primary">384 €</span></td>
+            <td><span class="val-note">§ 33b Abs. 3 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">GdB 30</td>
+            <td><span class="val-primary">620 €</span></td>
+            <td><span class="val-note">§ 33b Abs. 3 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">GdB 40</td>
+            <td><span class="val-primary">860 €</span></td>
+            <td><span class="val-note">§ 33b Abs. 3 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">GdB 50</td>
+            <td><span class="val-primary">1.140 €</span></td>
+            <td><span class="val-note">§ 33b Abs. 3 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">GdB 60</td>
+            <td><span class="val-primary">1.440 €</span></td>
+            <td><span class="val-note">§ 33b Abs. 3 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">GdB 70</td>
+            <td><span class="val-primary">1.780 €</span></td>
+            <td><span class="val-note">§ 33b Abs. 3 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">GdB 80</td>
+            <td><span class="val-primary">2.120 €</span></td>
+            <td><span class="val-note">§ 33b Abs. 3 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">GdB 90</td>
+            <td><span class="val-primary">2.460 €</span></td>
+            <td><span class="val-note">§ 33b Abs. 3 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">GdB 100</td>
+            <td><span class="val-primary">2.840 €</span></td>
+            <td><span class="val-note">§ 33b Abs. 3 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Blind / Hilflos<small>Merkzeichen Bl oder H</small></td>
+            <td><span class="val-primary">7.400 €</span></td>
+            <td><span class="val-note">§ 33b Abs. 3 S. 3 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Hinterbliebenen-Pauschbetrag<small>§ 33b Abs. 4 EStG</small></td>
+            <td><span class="val-primary">370 €</span></td>
+            <td><span class="val-note">§ 33b Abs. 4 EStG</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">Beträge gelten seit 2021 unverändert. Übertragung auf Eltern möglich (§ 33b Abs. 5 EStG), soweit das Kind den Pauschbetrag nicht selbst in Anspruch nimmt.</p>
+    </div>
+  </div>
+
   <!-- V. KENNGROSSEN -->
   <div class="section-block" data-steuerart="est" data-section="kenngroessen">
     <div class="section-card">
@@ -540,11 +633,6 @@ footer{
           <div class="kenn-label">Solidaritätszuschlag — Freigrenze</div>
           <div class="kenn-value" data-val="soli">20.350 € / 40.700 €</div>
           <div class="kenn-sub">Einzel / Zusammenveranlagung · Der tariflichen Einkommensteuer</div>
-        </div>
-        <div class="kenn-item">
-          <div class="kenn-label">Doppelte Haushaltsführung · Ausland</div>
-          <div class="kenn-value" data-val="dhf_ausland">2.000 € / Monat</div>
-          <div class="kenn-sub" data-val="dhf_ausland_sub">Deckelung der abzugsfähigen Unterkunftskosten im Ausland</div>
         </div>
       </div>
     </div>
@@ -1079,6 +1167,128 @@ footer{
     </div>
   </div>
 
+  <!-- I. AO · ZINSEN -->
+  <div class="section-block hidden" data-steuerart="ao" data-section="ao-zinsen">
+    <div class="section-card">
+      <div class="card-title">I · Zinsen · §§ 233–237 AO</div>
+      <table class="data-table keep-all-cols">
+        <thead>
+          <tr>
+            <th style="width:42%">Zinsart</th>
+            <th>Zinssatz</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Nachzahlungs- / Erstattungszinsen<small>Karenzzeit: 15 Monate nach Ablauf des VZ · z. B. VZ 2024 → Zinslauf ab 01.04.2026</small></td>
+            <td><span class="val-primary">1,8 % p. a.</span><span class="val-note">0,15 % pro Monat</span></td>
+            <td><span class="val-note">§ 233a AO</span></td>
+          </tr>
+          <tr>
+            <td class="label">Stundungszinsen</td>
+            <td><span class="val-primary">1,8 % p. a.</span><span class="val-note">0,15 % pro Monat</span></td>
+            <td><span class="val-note">§ 234 AO</span></td>
+          </tr>
+          <tr>
+            <td class="label">Hinterziehungszinsen<small>Zinslauf ab Zeitpunkt der Steuerverkürzung</small></td>
+            <td><span class="val-primary">1,8 % p. a.</span><span class="val-note">0,15 % pro Monat</span></td>
+            <td><span class="val-note">§ 235 AO</span></td>
+          </tr>
+          <tr>
+            <td class="label">Prozesszinsen<small>Bei Steuererstattung nach gerichtlichem Obsiegen</small></td>
+            <td><span class="val-primary">1,8 % p. a.</span><span class="val-note">0,15 % pro Monat</span></td>
+            <td><span class="val-note">§ 236 AO</span></td>
+          </tr>
+          <tr>
+            <td class="label">Aussetzungszinsen<small>Bei gewährter Aussetzung der Vollziehung (AdV)</small></td>
+            <td><span class="val-primary">1,8 % p. a.</span><span class="val-note">0,15 % pro Monat</span></td>
+            <td><span class="val-note">§ 237 AO</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">Zinssatz gilt einheitlich seit 01.01.2019 (rückwirkend festgesetzt durch das 2. JStG 2022 nach BVerfG-Entscheidung vom 08.07.2021, 1 BvR 2237/14). Zuvor 6 % p. a. (0,5 %/Monat), für Zeiträume ab 2014 für verfassungswidrig erklärt.</p>
+    </div>
+  </div>
+
+  <!-- II. AO · VERSPÄTUNGSZUSCHLAG -->
+  <div class="section-block hidden" data-steuerart="ao" data-section="ao-verspaetung">
+    <div class="section-card">
+      <div class="card-title">II · Verspätungszuschlag · § 152 AO</div>
+      <table class="data-table keep-all-cols">
+        <thead>
+          <tr>
+            <th style="width:42%">Parameter</th>
+            <th>Wert</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Grundsatz<small>Pro angefangenen Monat der Verspätung</small></td>
+            <td><span class="val-primary">0,25 %</span><span class="val-note">der Nachzahlungssteuer (nach Abzug von Vorauszahlungen und Steuerabzugsbeträgen)</span></td>
+            <td><span class="val-note">§ 152 Abs. 2 AO</span></td>
+          </tr>
+          <tr>
+            <td class="label">Mindestbetrag<small>Pro angefangenen Monat der Verspätung</small></td>
+            <td><span class="val-primary">25 €</span></td>
+            <td><span class="val-note">§ 152 Abs. 2 AO</span></td>
+          </tr>
+          <tr>
+            <td class="label">Höchstbetrag</td>
+            <td><span class="val-primary">25.000 €</span></td>
+            <td><span class="val-note">§ 152 Abs. 2 AO</span></td>
+          </tr>
+          <tr>
+            <td class="label">Automatische Festsetzung<small>Steuerpflichtige ohne Vorabanforderung · keine Ausnahme</small></td>
+            <td><span class="val-primary">Zwingend</span><span class="val-note">Kein Ermessen des FA bei Überschreiten der Abgabefrist</span></td>
+            <td><span class="val-note">§ 152 Abs. 3 AO</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">Gilt seit 01.01.2018 (StModernG 2016). Bemessungsgrundlage = festgesetzte Steuer abzüglich anrechenbarer Beträge (Vorauszahlungen, Kapitalertragsteuer, Lohnsteuer). BMG mind. 0 €.</p>
+    </div>
+  </div>
+
+  <!-- III. AO · SÄUMNISZUSCHLAG -->
+  <div class="section-block hidden" data-steuerart="ao" data-section="ao-saeuumnis">
+    <div class="section-card">
+      <div class="card-title">III · Säumniszuschlag · § 240 AO</div>
+      <table class="data-table keep-all-cols">
+        <thead>
+          <tr>
+            <th style="width:42%">Parameter</th>
+            <th>Wert</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Satz<small>Pro angefangenen Monat der Säumnis</small></td>
+            <td><span class="val-primary">1 %</span><span class="val-note">des rückständigen Steuerbetrags (abgerundet auf volle 50 €)</span></td>
+            <td><span class="val-note">§ 240 Abs. 1 AO</span></td>
+          </tr>
+          <tr>
+            <td class="label">Zahlungsschonfrist<small>Kein Säumniszuschlag innerhalb dieser Frist</small></td>
+            <td><span class="val-primary">3 Tage</span><span class="val-note">nach dem Fälligkeitstag (gilt nicht für Barzahlungen)</span></td>
+            <td><span class="val-note">§ 240 Abs. 3 AO</span></td>
+          </tr>
+          <tr>
+            <td class="label">Keine Säumniszuschläge bei</td>
+            <td><span class="val-primary">Stundung, AdV</span><span class="val-note">Während gewährter Stundung (§ 222 AO) oder Aussetzung der Vollziehung (§ 361 AO)</span></td>
+            <td><span class="val-note">§ 240 Abs. 1 S. 4 AO</span></td>
+          </tr>
+          <tr>
+            <td class="label">Höchstbetrag</td>
+            <td><span class="val-primary">Kein gesetzlicher Höchstbetrag</span></td>
+            <td><span class="val-note">§ 240 AO</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">Säumniszuschläge sind kein Verzugszins, sondern Druckmittel zur fristgerechten Zahlung (BFH). Sie entstehen kraft Gesetzes automatisch ohne Verwaltungsakt. Erlass möglich bei sachlicher oder persönlicher Unbilligkeit (§ 227 AO).</p>
+    </div>
+  </div>
+
   <!-- DISCLAIMER -->
   <p class="disclaimer">Alle Angaben basieren auf dem zuletzt geprüften Rechtsstand und beziehen sich auf die dargestellten Veranlagungszeiträume 2024–2026. Jahresunabhängige Werte (z. B. KSt, GewSt) gelten vorbehaltlich gesetzlicher Änderungen. Individuelle Faktoren (z. B. Kirchensteuer, besondere Einkunftsarten) bleiben unberücksichtigt. Kein Ersatz für individuelle Steuerberatung · Alle Angaben ohne Gewähr</p>
 
@@ -1392,7 +1602,7 @@ function filterSection(cat, el) {
 
   var savedArt = 'est';
   try { savedArt = localStorage.getItem('selected-steuerart') || 'est'; } catch(e) {}
-  if (!['est','lohn','ust','kst','gewst'].includes(savedArt)) savedArt = 'est';
+  if (!['est','lohn','ust','kst','gewst','ao'].includes(savedArt)) savedArt = 'est';
   switchSteuerart(savedArt, document.getElementById('steuerart-btn-' + savedArt));
 })();
 </script>
