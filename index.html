@@ -294,7 +294,7 @@ footer{
   <!-- HEADER -->
   <header style="text-align:center;margin-bottom:36px;">
     <h1>Steuerliche <span>Höchst-</span> &amp; Pauschbeträge</h1>
-    <p class="subtitle">ESt &amp; USt auf einen Blick · drei Steuerjahre im Zugriff</p>
+    <p class="subtitle">ESt, USt &amp; Lohn auf einen Blick · drei Steuerjahre im Zugriff</p>
   </header>
 
   <!-- JAHR-UMSCHALTER -->
@@ -304,6 +304,7 @@ footer{
   <div class="steuerart-bar">
     <button class="steuerart-btn active" id="steuerart-btn-est" onclick="switchSteuerart('est',this)">Einkommensteuer</button>
     <button class="steuerart-btn" id="steuerart-btn-ust" onclick="switchSteuerart('ust',this)">Umsatzsteuer</button>
+    <button class="steuerart-btn" id="steuerart-btn-lohn" onclick="switchSteuerart('lohn',this)">Lohn</button>
   </div>
 
   <!-- HINWEIS BEI UNGEPRÜFTEN WERTEN -->
@@ -328,6 +329,14 @@ footer{
     <button class="filter-btn" onclick="filterSection('grenzen',this)">Unternehmergrenzen</button>
     <button class="filter-btn" onclick="filterSection('voranmeldung',this)">Voranmeldung</button>
     <button class="filter-btn" onclick="filterSection('grenzueberschreitend',this)">Grenzüberschreitend</button>
+  </div>
+
+  <!-- FILTER · Lohn -->
+  <div class="filter-bar hidden" data-steuerart="lohn">
+    <button class="filter-btn active" onclick="filterSection('alle',this)">Alle</button>
+    <button class="filter-btn" onclick="filterSection('lohn-grundwerte',this)">Grundwerte</button>
+    <button class="filter-btn" onclick="filterSection('lohn-sachbezuege',this)">Sachbezüge &amp; Reisekosten</button>
+    <button class="filter-btn" onclick="filterSection('lohn-bav',this)">bAV &amp; VL</button>
   </div>
 
   <!-- I. FREIBETRÄGE -->
@@ -513,16 +522,6 @@ footer{
           <div class="kenn-value" data-val="dhf_ausland">2.000 € / Monat</div>
           <div class="kenn-sub" data-val="dhf_ausland_sub">Deckelung der abzugsfähigen Unterkunftskosten im Ausland</div>
         </div>
-        <div class="kenn-item">
-          <div class="kenn-label">Geringfügigkeitsgrenze (Minijob)</div>
-          <div class="kenn-value" data-val="minijob">603 € / Monat</div>
-          <div class="kenn-sub" data-val="minijob_sub">§ 8 Abs. 1a SGB IV · dynamisch an Mindestlohn gekoppelt (Mindestlohn × 130 / 3)</div>
-        </div>
-        <div class="kenn-item">
-          <div class="kenn-label">Gesetzlicher Mindestlohn</div>
-          <div class="kenn-value" data-val="mindestlohn">13,90 € / Stunde</div>
-          <div class="kenn-sub" data-val="mindestlohn_sub">§ 1 MiLoG · ab 01.01.2026 (zuvor 12,82 € seit 2025)</div>
-        </div>
       </div>
     </div>
   </div>
@@ -591,29 +590,29 @@ footer{
       <table class="data-table">
         <thead>
           <tr>
-            <th style="width:40%">Bezeichnung</th>
-            <th>Grenzwert</th>
+            <th style="width:40%">Zahllast Vorjahr</th>
+            <th>Meldeturnus</th>
             <th>Rechtsgrundlage</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="label">Monatliche Voranmeldung<small>USt-Zahllast Vorjahr übersteigt</small></td>
-            <td><span class="val-primary" data-val="ust_va_monat">9.000 €</span></td>
-            <td><span class="val-note">§ 18 Abs. 2 S. 2 UStG</span></td>
+            <td class="label">bis <span data-val="ust_va_befreiung">2.000 €</span></td>
+            <td><span class="val-primary">Keine Voranmeldung</span><span class="val-note">Nur Jahreserklärung</span></td>
+            <td><span class="val-note">§ 18 Abs. 2 S. 3 UStG</span></td>
           </tr>
-          <tr>
-            <td class="label">Vierteljährliche Voranmeldung<small>Standardfall unterhalb Monatsgrenze</small></td>
-            <td><span class="val-primary" data-val="ust_va_quartal">bis 9.000 €</span></td>
+          <tr class="highlight-row">
+            <td class="label"><span data-val="ust_va_befreiung">2.000 €</span> – <span data-val="ust_va_monat">9.000 €</span></td>
+            <td><span class="val-primary">Vierteljährlich</span></td>
             <td><span class="val-note">§ 18 Abs. 2 S. 1 UStG</span></td>
           </tr>
           <tr>
-            <td class="label">Befreiung von der Voranmeldung<small>USt-Zahllast Vorjahr nicht mehr als</small></td>
-            <td><span class="val-primary" data-val="ust_va_befreiung">2.000 €</span></td>
-            <td><span class="val-note">§ 18 Abs. 2 S. 3 UStG</span></td>
+            <td class="label">über <span data-val="ust_va_monat">9.000 €</span></td>
+            <td><span class="val-primary">Monatlich</span></td>
+            <td><span class="val-note">§ 18 Abs. 2 S. 2 UStG</span></td>
           </tr>
           <tr>
-            <td class="label">Dauerfristverlängerung — Sondervorauszahlung</td>
+            <td class="label">Dauerfristverlängerung<small>Sondervorauszahlung</small></td>
             <td><span class="val-primary">1/11</span><span class="val-note">der USt-Vorauszahlungen des Vorjahres</span></td>
             <td><span class="val-note">§§ 46–48 UStDV</span></td>
           </tr>
@@ -644,6 +643,135 @@ footer{
             <td class="label">Erwerbsschwelle<small>Für Erwerber ohne Vorsteuerabzug</small></td>
             <td><span class="val-primary">12.500 €</span></td>
             <td><span class="val-note">§ 1a Abs. 3 UStG</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- I. LOHN · GRUNDWERTE -->
+  <div class="section-block hidden" data-steuerart="lohn" data-section="lohn-grundwerte">
+    <div class="section-card">
+      <div class="card-title">I · Grundwerte <span data-val="year">2026</span></div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:42%">Bezeichnung</th>
+            <th>Wert</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row">
+            <td class="label">Gesetzlicher Mindestlohn<small data-val="mindestlohn_sub">§ 1 MiLoG · ab 01.01.2026</small></td>
+            <td><span class="val-primary" data-val="mindestlohn">13,90 € / Stunde</span></td>
+            <td><span class="val-note">§ 1 MiLoG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Minijob-Grenze<small data-val="minijob_sub">§ 8 Abs. 1a SGB IV · dynamisch gekoppelt</small></td>
+            <td><span class="val-primary" data-val="minijob">603 € / Monat</span></td>
+            <td><span class="val-note">§ 8 SGB IV</span></td>
+          </tr>
+          <tr>
+            <td class="label">Midijob-Obergrenze<small>Übergangsbereich · reduzierter AN-SV-Beitrag bis hier</small></td>
+            <td><span class="val-primary" data-val="midijob_ob">2.000 € / Monat</span></td>
+            <td><span class="val-note">§ 20 Abs. 2 SGB IV</span></td>
+          </tr>
+          <tr class="highlight-row">
+            <td class="label">BBG Rente / Arbeitslosenvers.<small>Beitragsbemessungsgrenze West</small></td>
+            <td><span class="val-primary" data-val="bbg_rv_mo">8.400 € / Monat</span><span class="val-note" data-val="bbg_rv_jahr">100.800 € / Jahr</span></td>
+            <td><span class="val-note">§ 159 SGB VI</span></td>
+          </tr>
+          <tr>
+            <td class="label">BBG Kranken- / Pflegevers.<small>Beitragsbemessungsgrenze</small></td>
+            <td><span class="val-primary" data-val="bbg_kv_mo">5.775 € / Monat</span><span class="val-note" data-val="bbg_kv_jahr">69.300 € / Jahr</span></td>
+            <td><span class="val-note">§ 223 SGB V</span></td>
+          </tr>
+          <tr>
+            <td class="label">Jahresarbeitsentgeltgrenze<small>Schwelle für PKV-Wechsel</small></td>
+            <td><span class="val-primary" data-val="jaeg_mo">6.150 € / Monat</span><span class="val-note" data-val="jaeg_jahr">73.800 € / Jahr</span></td>
+            <td><span class="val-note">§ 6 Abs. 6 SGB V</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- II. LOHN · SACHBEZÜGE & REISEKOSTEN -->
+  <div class="section-block hidden" data-steuerart="lohn" data-section="lohn-sachbezuege">
+    <div class="section-card">
+      <div class="card-title">II · Steuerfreie Sachbezüge &amp; Reisekosten</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:42%">Bezeichnung</th>
+            <th>Betrag</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Sachbezug Mittag- / Abendessen<small>Amtlicher Sachbezugswert je Mahlzeit</small></td>
+            <td><span class="val-primary" data-val="sachbezug_mahlzeit">4,40 € / Tag</span></td>
+            <td><span class="val-note">§ 8 Abs. 2 EStG · SvEV</span></td>
+          </tr>
+          <tr>
+            <td class="label">Sachbezug Frühstück</td>
+            <td><span class="val-primary" data-val="sachbezug_fruehstueck">2,30 € / Tag</span></td>
+            <td><span class="val-note">§ 8 Abs. 2 EStG · SvEV</span></td>
+          </tr>
+          <tr class="highlight-row">
+            <td class="label">Verpflegungsmehraufwand<small>Ab 8 Stunden Abwesenheit</small></td>
+            <td><span class="val-primary">16 € / Tag</span></td>
+            <td><span class="val-note">§ 9 Abs. 4a EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Verpflegungsmehraufwand<small>Ab 24 Stunden Abwesenheit (Ganztag)</small></td>
+            <td><span class="val-primary">32 € / Tag</span></td>
+            <td><span class="val-note">§ 9 Abs. 4a EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Übernachtungspauschale Inland<small>Ohne Einzelnachweis</small></td>
+            <td><span class="val-primary">20 € / Nacht</span></td>
+            <td><span class="val-note">R 9.7 LStR</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- III. LOHN · bAV & VL -->
+  <div class="section-block hidden" data-steuerart="lohn" data-section="lohn-bav">
+    <div class="section-card">
+      <div class="card-title">III · Betriebliche Altersvorsorge &amp; VL <span data-val="year">2026</span></div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:42%">Bezeichnung</th>
+            <th>Höchstbetrag</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row">
+            <td class="label">bAV steuerfrei<small>8 % der BBG RV West</small></td>
+            <td><span class="val-primary" data-val="bav_steuer">8.064 € / Jahr</span></td>
+            <td><span class="val-note">§ 3 Nr. 63 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">bAV SV-frei<small>4 % der BBG RV West</small></td>
+            <td><span class="val-primary" data-val="bav_sv">4.032 € / Jahr</span></td>
+            <td><span class="val-note">§ 1 Abs. 1 Nr. 9 SvEV</span></td>
+          </tr>
+          <tr class="highlight-row">
+            <td class="label">VL-Sparzulage (Arbeitnehmer-Sparzulage)<small>20 % von max. 400 € Einzahlung</small></td>
+            <td><span class="val-primary">80 € / Jahr</span></td>
+            <td><span class="val-note">§ 13 5. VermBG</span></td>
+          </tr>
+          <tr>
+            <td class="label">VL-Einkommensgrenze<small>Einzel / Zusammenveranlagung</small></td>
+            <td><span class="val-primary">40.000 € / 80.000 €</span></td>
+            <td><span class="val-note">§ 13 Abs. 1 5. VermBG</span></td>
           </tr>
         </tbody>
       </table>
@@ -698,6 +826,17 @@ var TAX_DATA = {
     ust_va_quartal: 'bis 9.000 €',
     ust_va_befreiung: '2.000 €',
     ust_hint: 'Kleinunternehmer: echte Steuerbefreiung seit 01.01.2025; bei unterjährigem Überschreiten der 100.000 € sofortige Regelbesteuerung ab diesem Umsatz.',
+    midijob_ob: '2.000 € / Monat',
+    bbg_rv_mo: '8.400 € / Monat',
+    bbg_rv_jahr: '100.800 € / Jahr',
+    bbg_kv_mo: '5.775 € / Monat',
+    bbg_kv_jahr: '69.300 € / Jahr',
+    jaeg_mo: '6.150 € / Monat',
+    jaeg_jahr: '73.800 € / Jahr',
+    sachbezug_mahlzeit: '4,40 € / Tag',
+    sachbezug_fruehstueck: '2,30 € / Tag',
+    bav_steuer: '8.064 € / Jahr',
+    bav_sv: '4.032 € / Jahr',
   },
   2025: {
     verified: true,
@@ -734,6 +873,17 @@ var TAX_DATA = {
     ust_va_quartal: 'bis 9.000 €',
     ust_va_befreiung: '2.000 €',
     ust_hint: 'Kleinunternehmer: echte Steuerbefreiung seit 01.01.2025 (§ 4 Nr. 8 ff. Verweis aus § 19); bei unterjährigem Überschreiten der 100.000 € sofortige Regelbesteuerung ab diesem Umsatz.',
+    midijob_ob: '2.000 € / Monat',
+    bbg_rv_mo: '8.050 € / Monat',
+    bbg_rv_jahr: '96.600 € / Jahr',
+    bbg_kv_mo: '5.512,50 € / Monat',
+    bbg_kv_jahr: '66.150 € / Jahr',
+    jaeg_mo: '6.150 € / Monat',
+    jaeg_jahr: '73.800 € / Jahr',
+    sachbezug_mahlzeit: '4,40 € / Tag',
+    sachbezug_fruehstueck: '2,30 € / Tag',
+    bav_steuer: '7.728 € / Jahr',
+    bav_sv: '3.864 € / Jahr',
   },
   2024: {
     verified: true,
@@ -770,6 +920,17 @@ var TAX_DATA = {
     ust_va_quartal: 'bis 7.500 €',
     ust_va_befreiung: '1.000 €',
     ust_hint: 'Ist-Versteuerungsgrenze ab 2024 durch Wachstumschancengesetz von 600.000 € auf 800.000 € erhöht. Kleinunternehmerregelung bis 31.12.2024: unechte Steuerbefreiung mit Umsatzgrenzen 22.000 € / 50.000 €.',
+    midijob_ob: '2.000 € / Monat',
+    bbg_rv_mo: '7.550 € / Monat',
+    bbg_rv_jahr: '90.600 € / Jahr',
+    bbg_kv_mo: '5.175 € / Monat',
+    bbg_kv_jahr: '62.100 € / Jahr',
+    jaeg_mo: '5.775 € / Monat',
+    jaeg_jahr: '69.300 € / Jahr',
+    sachbezug_mahlzeit: '4,13 € / Tag',
+    sachbezug_fruehstueck: '2,17 € / Tag',
+    bav_steuer: '7.248 € / Jahr',
+    bav_sv: '3.624 € / Jahr',
   }
 };
 
@@ -915,7 +1076,7 @@ function filterSection(cat, el) {
 
   var savedArt = 'est';
   try { savedArt = localStorage.getItem('selected-steuerart') || 'est'; } catch(e) {}
-  if (savedArt !== 'est' && savedArt !== 'ust') savedArt = 'est';
+  if (savedArt !== 'est' && savedArt !== 'ust' && savedArt !== 'lohn') savedArt = 'est';
   switchSteuerart(savedArt, document.getElementById('steuerart-btn-' + savedArt));
 })();
 </script>
