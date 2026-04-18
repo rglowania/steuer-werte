@@ -1019,9 +1019,9 @@ footer{
         </thead>
         <tbody>
           <tr>
-            <td class="label">Grundbesitzkürzung<small>Im Erhebungszeitraum als Betriebsausgabe erfasste Grundsteuer für Grundbesitz des Betriebsvermögens</small></td>
-            <td><span class="val-primary">Tatsächliche Grundsteuer</span><span class="val-note">Gilt ab 2025 · zuvor 1,2 % des Einheitswerts</span></td>
-            <td><span class="val-note">§ 9 Nr. 1 S. 1 GewStG</span></td>
+            <td class="label">Grundbesitzkürzung<small data-val="gewst_grundbesitz_sub">Im Erhebungszeitraum als Betriebsausgabe erfasste Grundsteuer für Grundbesitz des Betriebsvermögens</small></td>
+            <td><span class="val-primary" data-val="gewst_grundbesitz">Tatsächliche Grundsteuer</span><span class="val-note" data-val="gewst_grundbesitz_note"></span></td>
+            <td><span class="val-note" data-val="gewst_grundbesitz_para">§ 9 Nr. 1 S. 1 GewStG</span></td>
           </tr>
           <tr>
             <td class="label">Schachtelprivileg<small>In- und ausländische KapGes · Mindestbeteiligung</small></td>
@@ -1092,6 +1092,10 @@ var TAX_DATA = {
     sachbezug_fruehstueck: '2,30 € / Tag',
     bav_steuer: '8.064 € / Jahr',
     bav_sv: '4.032 € / Jahr',
+    gewst_grundbesitz: 'Tatsächliche Grundsteuer',
+    gewst_grundbesitz_sub: 'Im Erhebungszeitraum als Betriebsausgabe erfasste Grundsteuer für Grundbesitz des Betriebsvermögens',
+    gewst_grundbesitz_note: '',
+    gewst_grundbesitz_para: '§ 9 Nr. 1 S. 1 GewStG',
   },
   2025: {
     verified: true,
@@ -1139,6 +1143,10 @@ var TAX_DATA = {
     sachbezug_fruehstueck: '2,30 € / Tag',
     bav_steuer: '7.728 € / Jahr',
     bav_sv: '3.864 € / Jahr',
+    gewst_grundbesitz: 'Tatsächliche Grundsteuer',
+    gewst_grundbesitz_sub: 'Im Erhebungszeitraum als Betriebsausgabe erfasste Grundsteuer für Grundbesitz des Betriebsvermögens',
+    gewst_grundbesitz_note: 'Gilt ab 01.01.2025 · zuvor 1,2 % des Einheitswerts',
+    gewst_grundbesitz_para: '§ 9 Nr. 1 S. 1 GewStG n.F.',
   },
   2024: {
     verified: true,
@@ -1186,6 +1194,10 @@ var TAX_DATA = {
     sachbezug_fruehstueck: '2,17 € / Tag',
     bav_steuer: '7.248 € / Jahr',
     bav_sv: '3.624 € / Jahr',
+    gewst_grundbesitz: '1,2 % des Einheitswerts',
+    gewst_grundbesitz_sub: 'Einheitswert des zum Betriebsvermögen gehörenden Grundbesitzes',
+    gewst_grundbesitz_note: 'Alte Rechtslage bis 31.12.2024 · ab 2025 tatsächliche Grundsteuer',
+    gewst_grundbesitz_para: '§ 9 Nr. 1 S. 1 GewStG a.F.',
   }
 };
 
