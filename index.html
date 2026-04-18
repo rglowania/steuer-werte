@@ -280,6 +280,7 @@ footer{
     <button class="filter-btn" onclick="filterSection('vorsorge',this)">Vorsorge</button>
     <button class="filter-btn" onclick="filterSection('sonderausgaben',this)">Sonderausgaben</button>
     <button class="filter-btn" onclick="filterSection('kenngroessen',this)">Kenngrößen</button>
+    <button class="filter-btn" onclick="filterSection('umsatzsteuer',this)">Umsatzsteuer</button>
   </div>
 
   <!-- I. FREIBETRÄGE -->
@@ -469,6 +470,65 @@ footer{
     </div>
   </div>
 
+  <!-- VI. UMSATZSTEUER -->
+  <div class="section-block" data-section="umsatzsteuer">
+    <div class="section-card">
+      <div class="card-title">VI · Umsatzsteuer (UStG) <span data-val="year">2026</span></div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:40%">Bezeichnung</th>
+            <th>Betrag / Satz</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Regelsteuersatz</td>
+            <td><span class="val-primary">19 %</span></td>
+            <td><span class="val-note">§ 12 Abs. 1 UStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Ermäßigter Steuersatz<small>u. a. Lebensmittel, Bücher, Kultur</small></td>
+            <td><span class="val-primary">7 %</span></td>
+            <td><span class="val-note">§ 12 Abs. 2 UStG</span></td>
+          </tr>
+          <tr class="highlight-row">
+            <td class="label">Kleinunternehmergrenze<small data-val="ust_ku_sub">Vorjahr / laufendes Jahr</small></td>
+            <td><span class="val-primary" data-val="ust_ku">25.000 € / 100.000 €</span></td>
+            <td><span class="val-note">§ 19 UStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Ist-Versteuerung<small>Gesamtumsatz-Grenze Vorjahr</small></td>
+            <td><span class="val-primary" data-val="ust_ist">800.000 €</span></td>
+            <td><span class="val-note">§ 20 UStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Voranmeldung — monatlich<small>USt-Zahllast Vorjahr übersteigt</small></td>
+            <td><span class="val-primary" data-val="ust_va_monat">9.000 €</span></td>
+            <td><span class="val-note">§ 18 Abs. 2 UStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Voranmeldung — Befreiung<small>USt-Zahllast Vorjahr nicht mehr als</small></td>
+            <td><span class="val-primary" data-val="ust_va_befreiung">2.000 €</span></td>
+            <td><span class="val-note">§ 18 Abs. 2 S. 3 UStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">OSS-Schwelle<small>Innergemeinschaftlicher Fernverkauf B2C</small></td>
+            <td><span class="val-primary">10.000 €</span></td>
+            <td><span class="val-note">§ 3c Abs. 4 UStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Erwerbsschwelle<small>Für Erwerber ohne Vorsteuerabzug</small></td>
+            <td><span class="val-primary">12.500 €</span></td>
+            <td><span class="val-note">§ 1a Abs. 3 UStG</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note" data-val="ust_hint">Kleinunternehmer: echte Steuerbefreiung seit 01.01.2025; bei unterjährigem Überschreiten der 100.000 € sofortige Regelbesteuerung ab diesem Umsatz.</p>
+    </div>
+  </div>
+
   <!-- DISCLAIMER -->
   <p class="disclaimer">Alle Angaben beziehen sich auf den Veranlagungszeitraum <span data-val="year">2026</span> und basieren auf dem zum Zeitpunkt der Erstellung geltenden Rechtsstand. Individuelle Faktoren (z. B. Kirchensteuer, besondere Einkunftsarten) bleiben unberücksichtigt. Kein Ersatz für individuelle Steuerberatung · Alle Angaben ohne Gewähr</p>
 
@@ -506,6 +566,12 @@ var TAX_DATA = {
     dhf_ausland: '2.000 € / Monat',
     dhf_ausland_sub: 'Deckelung der abzugsfähigen Unterkunftskosten im Ausland',
     guenstiger_hint: 'Günstigerprüfung (§ 31 EStG) · Kinderfreibetrag wirkt sich aus ab ~32 % Grenzsteuersatz · ca. 50.000 € Brutto (SK I, ohne Sonderabzüge)',
+    ust_ku: '25.000&thinsp;/&thinsp;100.000 €',
+    ust_ku_sub: 'Vorjahr / laufendes Jahr',
+    ust_ist: '800.000 €',
+    ust_va_monat: '9.000 €',
+    ust_va_befreiung: '2.000 €',
+    ust_hint: 'Kleinunternehmer: echte Steuerbefreiung seit 01.01.2025; bei unterjährigem Überschreiten der 100.000 € sofortige Regelbesteuerung ab diesem Umsatz.',
   },
   2025: {
     verified: true,
@@ -531,6 +597,12 @@ var TAX_DATA = {
     dhf_ausland: 'Keine Obergrenze',
     dhf_ausland_sub: 'Kein fester Höchstbetrag – Angemessenheitsprüfung; 60-qm-Regel des FA nicht anwendbar (BFH v. 9.8.2023, Az. VI R 30/21)',
     guenstiger_hint: 'Günstigerprüfung (§ 31 EStG) · Kinderfreibetrag wirkt sich aus ab ~32 % Grenzsteuersatz · ca. 49.000 € Brutto (SK I, ohne Sonderabzüge)',
+    ust_ku: '25.000&thinsp;/&thinsp;100.000 €',
+    ust_ku_sub: 'Vorjahr / laufendes Jahr · Neuregelung ab 01.01.2025',
+    ust_ist: '800.000 €',
+    ust_va_monat: '9.000 €',
+    ust_va_befreiung: '2.000 €',
+    ust_hint: 'Kleinunternehmer: echte Steuerbefreiung seit 01.01.2025 (§ 4 Nr. 8 ff. Verweis aus § 19); bei unterjährigem Überschreiten der 100.000 € sofortige Regelbesteuerung ab diesem Umsatz.',
   },
   2024: {
     verified: true,
@@ -556,6 +628,12 @@ var TAX_DATA = {
     dhf_ausland: 'Keine Obergrenze',
     dhf_ausland_sub: 'Kein fester Höchstbetrag – Angemessenheitsprüfung; 60-qm-Regel des FA nicht anwendbar (BFH v. 9.8.2023, Az. VI R 30/21)',
     guenstiger_hint: 'Günstigerprüfung (§ 31 EStG) · Kinderfreibetrag wirkt sich aus ab ~32 % Grenzsteuersatz · ca. 48.000 € Brutto (SK I, ohne Sonderabzüge)',
+    ust_ku: '22.000&thinsp;/&thinsp;50.000 €',
+    ust_ku_sub: 'Vorjahr / voraussichtlich laufendes Jahr (alte Regelung bis 31.12.2024)',
+    ust_ist: '800.000 €',
+    ust_va_monat: '7.500 €',
+    ust_va_befreiung: '1.000 €',
+    ust_hint: 'Ist-Versteuerungsgrenze ab 2024 durch Wachstumschancengesetz von 600.000 € auf 800.000 € erhöht. Kleinunternehmerregelung bis 31.12.2024: unechte Steuerbefreiung mit Umsatzgrenzen 22.000 € / 50.000 €.',
   }
 };
 
