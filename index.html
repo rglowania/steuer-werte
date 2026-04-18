@@ -293,7 +293,7 @@ footer{
   <!-- HEADER -->
   <header style="text-align:center;margin-bottom:36px;">
     <h1>Steuerliche <span>Höchst-</span> &amp; Pauschbeträge</h1>
-    <p class="subtitle">ESt, Lohn, USt &amp; KSt auf einen Blick · drei Steuerjahre im Zugriff</p>
+    <p class="subtitle">ESt · Lohn · USt · KSt · GewSt auf einen Blick · drei Steuerjahre im Zugriff</p>
   </header>
 
   <!-- JAHR-UMSCHALTER -->
@@ -305,6 +305,7 @@ footer{
     <button class="steuerart-btn" id="steuerart-btn-lohn" onclick="switchSteuerart('lohn',this)">Lohn</button>
     <button class="steuerart-btn" id="steuerart-btn-ust" onclick="switchSteuerart('ust',this)">Umsatzsteuer</button>
     <button class="steuerart-btn" id="steuerart-btn-kst" onclick="switchSteuerart('kst',this)">Körperschaftsteuer</button>
+    <button class="steuerart-btn" id="steuerart-btn-gewst" onclick="switchSteuerart('gewst',this)">Gewerbesteuer</button>
   </div>
 
   <!-- HINWEIS BEI UNGEPRÜFTEN WERTEN -->
@@ -345,6 +346,14 @@ footer{
     <button class="filter-btn" onclick="filterSection('kst-saetze',this)">Steuersätze</button>
     <button class="filter-btn" onclick="filterSection('kst-ausschuettung',this)">Ausschüttung</button>
     <button class="filter-btn" onclick="filterSection('kst-verlust',this)">Verlust &amp; Zinsschranke</button>
+  </div>
+
+  <!-- FILTER · GewSt -->
+  <div class="filter-bar hidden" data-steuerart="gewst">
+    <button class="filter-btn active" onclick="filterSection('alle',this)">Alle</button>
+    <button class="filter-btn" onclick="filterSection('gewst-grundwerte',this)">Grundwerte</button>
+    <button class="filter-btn" onclick="filterSection('gewst-hinzurechnung',this)">Hinzurechnungen</button>
+    <button class="filter-btn" onclick="filterSection('gewst-kuerzung',this)">Kürzungen</button>
   </div>
 
   <!-- I. FREIBETRÄGE -->
@@ -905,6 +914,135 @@ footer{
     </div>
   </div>
 
+  <!-- I. GewSt · GRUNDWERTE -->
+  <div class="section-block hidden" data-steuerart="gewst" data-section="gewst-grundwerte">
+    <div class="section-card">
+      <div class="card-title">I · Grundwerte &amp; Sätze</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:42%">Bezeichnung</th>
+            <th>Wert</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Steuermesszahl</td>
+            <td><span class="val-primary">3,5 %</span></td>
+            <td><span class="val-note">§ 11 Abs. 2 GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Freibetrag<small>Einzelunternehmen &amp; Personengesellschaften</small></td>
+            <td><span class="val-primary">24.500 €</span></td>
+            <td><span class="val-note">§ 11 Abs. 1 S. 3 Nr. 1 GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Freibetrag<small>Kapitalgesellschaften</small></td>
+            <td><span class="val-primary">—</span></td>
+            <td><span class="val-note">§ 11 Abs. 1 S. 2 GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Mindest-Hebesatz<small>Gilt für alle hebeberechtigten Gemeinden</small></td>
+            <td><span class="val-primary">200 %</span></td>
+            <td><span class="val-note">§ 16 Abs. 4 GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">ESt-Anrechnung (Faktor)<small>Anrechenbar: Faktor × Steuermessbetrag</small></td>
+            <td><span class="val-primary">4,0</span><span class="val-note">Anrechnung max. tatsächlich gezahlte GewSt</span></td>
+            <td><span class="val-note">§ 35 EStG</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- II. GewSt · HINZURECHNUNGEN -->
+  <div class="section-block hidden" data-steuerart="gewst" data-section="gewst-hinzurechnung">
+    <div class="section-card">
+      <div class="card-title">II · Hinzurechnungen · § 8 Nr. 1 GewStG</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:42%">Komponente</th>
+            <th>Hinzurechnungsanteil</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Freibetrag<small>Summe der Finanzierungsanteile; darunter keine Hinzurechnung</small></td>
+            <td><span class="val-primary">200.000 €</span></td>
+            <td><span class="val-note">§ 8 Nr. 1 GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Entgelte für Schulden<small>Zinsen, Diskontbeträge</small></td>
+            <td><span class="val-primary">100 %</span></td>
+            <td><span class="val-note">§ 8 Nr. 1 Buchst. a GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Miet-/Pachtzinsen · bewegliche WG</td>
+            <td><span class="val-primary">20 %</span></td>
+            <td><span class="val-note">§ 8 Nr. 1 Buchst. d GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Miet-/Pachtzinsen · unbewegliche WG</td>
+            <td><span class="val-primary">50 %</span></td>
+            <td><span class="val-note">§ 8 Nr. 1 Buchst. e GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Lizenz- &amp; Konzessionsgebühren</td>
+            <td><span class="val-primary">25 %</span></td>
+            <td><span class="val-note">§ 8 Nr. 1 Buchst. f GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Anwendung auf Summe<small>25 % der Summe der Finanzierungsanteile nach Abzug Freibetrag</small></td>
+            <td><span class="val-primary">25 %</span></td>
+            <td><span class="val-note">§ 8 Nr. 1 GewStG</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- III. GewSt · KÜRZUNGEN -->
+  <div class="section-block hidden" data-steuerart="gewst" data-section="gewst-kuerzung">
+    <div class="section-card">
+      <div class="card-title">III · Kürzungen · § 9 GewStG</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:42%">Bezeichnung</th>
+            <th>Kürzungsbetrag</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Grundbesitzkürzung<small>1,2 % des Einheitswerts des Grundbesitzes</small></td>
+            <td><span class="val-primary">1,2 %</span><span class="val-note">Alternativ: erweiterte Kürzung (100 %) für reine Grundstücksunternehmen</span></td>
+            <td><span class="val-note">§ 9 Nr. 1 GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Schachtelprivileg (Inland)<small>Mindestbeteiligung an inländischer KapGes</small></td>
+            <td><span class="val-primary">ab 15 %</span><span class="val-note">Gewinnanteile vollständig kürzungsfähig</span></td>
+            <td><span class="val-note">§ 9 Nr. 2a GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Schachtelprivileg (Ausland)<small>Mindestbeteiligung an ausländischer KapGes</small></td>
+            <td><span class="val-primary">ab 15 %</span></td>
+            <td><span class="val-note">§ 9 Nr. 7 GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Spenden<small>Wie Betriebsausgabe abgezogen, wieder kürzungsfähig</small></td>
+            <td><span class="val-primary">Tatsächlicher Betrag</span></td>
+            <td><span class="val-note">§ 9 Nr. 5 GewStG</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <!-- DISCLAIMER -->
   <p class="disclaimer">Alle Angaben beziehen sich auf den Veranlagungszeitraum <span data-val="year">2026</span> und basieren auf dem zum Zeitpunkt der Erstellung geltenden Rechtsstand. Individuelle Faktoren (z. B. Kirchensteuer, besondere Einkunftsarten) bleiben unberücksichtigt. Kein Ersatz für individuelle Steuerberatung · Alle Angaben ohne Gewähr</p>
 
@@ -1203,7 +1341,7 @@ function filterSection(cat, el) {
 
   var savedArt = 'est';
   try { savedArt = localStorage.getItem('selected-steuerart') || 'est'; } catch(e) {}
-  if (!['est','lohn','ust','kst'].includes(savedArt)) savedArt = 'est';
+  if (!['est','lohn','ust','kst','gewst'].includes(savedArt)) savedArt = 'est';
   switchSteuerart(savedArt, document.getElementById('steuerart-btn-' + savedArt));
 })();
 </script>
