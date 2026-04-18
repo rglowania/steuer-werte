@@ -294,7 +294,7 @@ footer{
   <!-- HEADER -->
   <header style="text-align:center;margin-bottom:36px;">
     <h1>Steuerliche <span>Höchst-</span> &amp; Pauschbeträge</h1>
-    <p class="subtitle"><span id="vz-subtitle">Steuerjahr 2026</span> · Zahlen, Grenzen &amp; Pauschalen</p>
+    <p class="subtitle">ESt &amp; USt auf einen Blick · drei Steuerjahre im Zugriff</p>
   </header>
 
   <!-- JAHR-UMSCHALTER -->
@@ -810,9 +810,6 @@ function switchYear(year) {
       el.innerHTML = data[key];
     }
   });
-
-  // Subtitle aktualisieren
-  document.getElementById('vz-subtitle').textContent = 'Steuerjahr ' + year;
 
   // Aktiver Jahr-Button
   document.querySelectorAll('.year-btn').forEach(function(b) { b.classList.remove('active'); });
