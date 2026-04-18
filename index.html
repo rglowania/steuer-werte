@@ -293,7 +293,7 @@ footer{
   <!-- HEADER -->
   <header style="text-align:center;margin-bottom:36px;">
     <h1>Steuerliche <span>Höchst-</span> &amp; Pauschbeträge</h1>
-    <p class="subtitle">ESt, USt &amp; Lohn auf einen Blick · drei Steuerjahre im Zugriff</p>
+    <p class="subtitle">ESt, Lohn, USt &amp; KSt auf einen Blick · drei Steuerjahre im Zugriff</p>
   </header>
 
   <!-- JAHR-UMSCHALTER -->
@@ -302,8 +302,9 @@ footer{
   <!-- STEUERART-UMSCHALTER -->
   <div class="steuerart-bar">
     <button class="steuerart-btn active" id="steuerart-btn-est" onclick="switchSteuerart('est',this)">Einkommensteuer</button>
-    <button class="steuerart-btn" id="steuerart-btn-ust" onclick="switchSteuerart('ust',this)">Umsatzsteuer</button>
     <button class="steuerart-btn" id="steuerart-btn-lohn" onclick="switchSteuerart('lohn',this)">Lohn</button>
+    <button class="steuerart-btn" id="steuerart-btn-ust" onclick="switchSteuerart('ust',this)">Umsatzsteuer</button>
+    <button class="steuerart-btn" id="steuerart-btn-kst" onclick="switchSteuerart('kst',this)">Körperschaftsteuer</button>
   </div>
 
   <!-- HINWEIS BEI UNGEPRÜFTEN WERTEN -->
@@ -321,6 +322,14 @@ footer{
     <button class="filter-btn" onclick="filterSection('kenngroessen',this)">Kenngrößen</button>
   </div>
 
+  <!-- FILTER · Lohn -->
+  <div class="filter-bar hidden" data-steuerart="lohn">
+    <button class="filter-btn active" onclick="filterSection('alle',this)">Alle</button>
+    <button class="filter-btn" onclick="filterSection('lohn-grundwerte',this)">Grundwerte</button>
+    <button class="filter-btn" onclick="filterSection('lohn-sachbezuege',this)">Sachbezüge &amp; Reisekosten</button>
+    <button class="filter-btn" onclick="filterSection('lohn-bav',this)">bAV &amp; VL</button>
+  </div>
+
   <!-- FILTER · USt -->
   <div class="filter-bar hidden" data-steuerart="ust">
     <button class="filter-btn active" onclick="filterSection('alle',this)">Alle</button>
@@ -330,12 +339,12 @@ footer{
     <button class="filter-btn" onclick="filterSection('grenzueberschreitend',this)">Grenzüberschreitend</button>
   </div>
 
-  <!-- FILTER · Lohn -->
-  <div class="filter-bar hidden" data-steuerart="lohn">
+  <!-- FILTER · KSt -->
+  <div class="filter-bar hidden" data-steuerart="kst">
     <button class="filter-btn active" onclick="filterSection('alle',this)">Alle</button>
-    <button class="filter-btn" onclick="filterSection('lohn-grundwerte',this)">Grundwerte</button>
-    <button class="filter-btn" onclick="filterSection('lohn-sachbezuege',this)">Sachbezüge &amp; Reisekosten</button>
-    <button class="filter-btn" onclick="filterSection('lohn-bav',this)">bAV &amp; VL</button>
+    <button class="filter-btn" onclick="filterSection('kst-saetze',this)">Steuersätze</button>
+    <button class="filter-btn" onclick="filterSection('kst-ausschuettung',this)">Ausschüttung</button>
+    <button class="filter-btn" onclick="filterSection('kst-verlust',this)">Verlust &amp; Zinsschranke</button>
   </div>
 
   <!-- I. FREIBETRÄGE -->
@@ -642,6 +651,125 @@ footer{
             <td class="label">Erwerbsschwelle<small>Für Erwerber ohne Vorsteuerabzug</small></td>
             <td><span class="val-primary">12.500 €</span></td>
             <td><span class="val-note">§ 1a Abs. 3 UStG</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- I. KSt · STEUERSÄTZE -->
+  <div class="section-block hidden" data-steuerart="kst" data-section="kst-saetze">
+    <div class="section-card">
+      <div class="card-title">I · Steuersätze &amp; Gesamtbelastung</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:42%">Bezeichnung</th>
+            <th>Satz / Wert</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Körperschaftsteuersatz<small>Einheitlich für alle Kapitalgesellschaften</small></td>
+            <td><span class="val-primary">15 %</span></td>
+            <td><span class="val-note">§ 23 Abs. 1 KStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">KSt + Solidaritätszuschlag<small>5,5 % auf KSt</small></td>
+            <td><span class="val-primary">15,825 %</span></td>
+            <td><span class="val-note">§ 23 KStG · § 4 SolZG</span></td>
+          </tr>
+          <tr>
+            <td class="label">GewSt-Messzahl<small>× gemeindlicher Hebesatz = GewSt-Satz</small></td>
+            <td><span class="val-primary">3,5 %</span></td>
+            <td><span class="val-note">§ 11 Abs. 2 GewStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Typische Gesamtbelastung<small>KSt + Soli + GewSt (Hebesatz ~400 %)</small></td>
+            <td><span class="val-primary">~29,8 %</span></td>
+            <td><span class="val-note">Richtwert · hebesatzabhängig</span></td>
+          </tr>
+          <tr>
+            <td class="label">Globale Mindeststeuer (Pillar II)<small>Für Konzerne mit Umsatz ≥ 750 Mio. €</small></td>
+            <td><span class="val-primary">15 %</span><span class="val-note">Effektiver Steuersatz je Jurisdiktion</span></td>
+            <td><span class="val-note">MinStG · ab VZ 2024</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- II. KSt · AUSSCHÜTTUNG -->
+  <div class="section-block hidden" data-steuerart="kst" data-section="kst-ausschuettung">
+    <div class="section-card">
+      <div class="card-title">II · Ausschüttung &amp; Beteiligung</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:42%">Bezeichnung</th>
+            <th>Satz / Wert</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Abgeltungsteuer auf Dividenden<small>Privatperson als Gesellschafter</small></td>
+            <td><span class="val-primary">25 %</span><span class="val-note">+ Soli → 26,375 % Gesamtbelastung</span></td>
+            <td><span class="val-note">§ 43a EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Teileinkünfteverfahren<small>Ab 25 % Beteiligung oder berufl. Tätigkeit</small></td>
+            <td><span class="val-primary">60 % steuerpflichtig</span><span class="val-note">40 % steuerfrei</span></td>
+            <td><span class="val-note">§ 3 Nr. 40 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Schachtelprivileg<small>Dividende KapGes → KapGes</small></td>
+            <td><span class="val-primary">95 % steuerfrei</span><span class="val-note">5 % nicht abzugsfähige Betriebsausgaben</span></td>
+            <td><span class="val-note">§ 8b Abs. 1, 5 KStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Streubesitzdividende<small>Beteiligung unter 10 %</small></td>
+            <td><span class="val-primary">Voll steuerpflichtig</span></td>
+            <td><span class="val-note">§ 8b Abs. 4 KStG</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- III. KSt · VERLUST & ZINSSCHRANKE -->
+  <div class="section-block hidden" data-steuerart="kst" data-section="kst-verlust">
+    <div class="section-card">
+      <div class="card-title">III · Verlust &amp; Zinsschranke</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:42%">Bezeichnung</th>
+            <th>Grenzwert</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Mindestbesteuerung — Sockelbetrag<small>Bis hier: voller Verlustabzug möglich</small></td>
+            <td><span class="val-primary">1.000.000 €</span></td>
+            <td><span class="val-note">§ 10d Abs. 2 EStG i.V.m. § 8 Abs. 1 KStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Mindestbesteuerung — über Sockelbetrag<small>Max. abziehbarer Anteil des übersteigenden Verlusts</small></td>
+            <td><span class="val-primary">60 %</span></td>
+            <td><span class="val-note">§ 10d Abs. 2 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Zinsschranke — Freigrenze<small>Nettozinsaufwand; darunter keine Beschränkung</small></td>
+            <td><span class="val-primary">3.000.000 €</span></td>
+            <td><span class="val-note">§ 4h Abs. 2 EStG · § 8a KStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Zinsschranke — Abzugsgrenze<small>Über Freigrenze: max. abziehbarer Anteil</small></td>
+            <td><span class="val-primary">30 % des EBITDA</span></td>
+            <td><span class="val-note">§ 4h Abs. 1 EStG</span></td>
           </tr>
         </tbody>
       </table>
@@ -1075,7 +1203,7 @@ function filterSection(cat, el) {
 
   var savedArt = 'est';
   try { savedArt = localStorage.getItem('selected-steuerart') || 'est'; } catch(e) {}
-  if (savedArt !== 'est' && savedArt !== 'ust' && savedArt !== 'lohn') savedArt = 'est';
+  if (!['est','lohn','ust','kst'].includes(savedArt)) savedArt = 'est';
   switchSteuerart(savedArt, document.getElementById('steuerart-btn-' + savedArt));
 })();
 </script>
