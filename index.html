@@ -252,10 +252,24 @@ footer{
 }
 
 @media(max-width:600px){
-  .section-card{padding:20px 18px;}
+  body{padding:30px 14px 60px;}
+  h1{font-size:22px;}
+  .theme-toggle{top:10px;right:10px;}
+  .section-card{padding:18px 14px;}
   .filter-bar{gap:6px;}
+  .steuerart-bar{width:100%;flex-wrap:wrap;}
+  .steuerart-btn{flex:1 1 auto;padding:8px 14px;font-size:10px;letter-spacing:1.5px;}
+  .year-bar{width:100%;}
+  .year-btn{flex:1 1 auto;padding:7px 10px;font-size:12px;text-align:center;}
+  .data-table{table-layout:auto;}
   .data-table td,.data-table th{font-size:11px;}
-  .val-note{max-width:160px;}
+  .data-table td:not(:first-child){white-space:normal;word-break:break-word;}
+  .data-table td.label{padding-right:10px;}
+  .val-primary{font-size:12px;}
+  .val-note{max-width:100%;font-size:9px;line-height:1.4;}
+  .kenn-grid{grid-template-columns:1fr;gap:10px;}
+  .kenn-item{padding:14px 16px;}
+  .kenn-value{font-size:16px;}
 }
 
 </style>
@@ -280,17 +294,17 @@ footer{
   <!-- HEADER -->
   <header style="text-align:center;margin-bottom:36px;">
     <h1>Steuerliche <span>Höchst-</span> &amp; Pauschbeträge</h1>
-    <p class="subtitle"><span id="vz-subtitle">Veranlagungszeitraum 2026</span> · Übersicht für Berater &amp; Mandanten</p>
+    <p class="subtitle"><span id="vz-subtitle">Steuerjahr 2026</span> · Zahlen, Grenzen &amp; Pauschalen</p>
   </header>
+
+  <!-- JAHR-UMSCHALTER -->
+  <div class="year-bar" id="year-bar"><!-- wird per JS gerendert --></div>
 
   <!-- STEUERART-UMSCHALTER -->
   <div class="steuerart-bar">
     <button class="steuerart-btn active" id="steuerart-btn-est" onclick="switchSteuerart('est',this)">Einkommensteuer</button>
     <button class="steuerart-btn" id="steuerart-btn-ust" onclick="switchSteuerart('ust',this)">Umsatzsteuer</button>
   </div>
-
-  <!-- JAHR-UMSCHALTER -->
-  <div class="year-bar" id="year-bar"><!-- wird per JS gerendert --></div>
 
   <!-- HINWEIS BEI UNGEPRÜFTEN WERTEN -->
   <div class="unverified-notice hidden" id="unverified-notice">
@@ -798,7 +812,7 @@ function switchYear(year) {
   });
 
   // Subtitle aktualisieren
-  document.getElementById('vz-subtitle').textContent = 'Veranlagungszeitraum ' + year;
+  document.getElementById('vz-subtitle').textContent = 'Steuerjahr ' + year;
 
   // Aktiver Jahr-Button
   document.querySelectorAll('.year-btn').forEach(function(b) { b.classList.remove('active'); });
