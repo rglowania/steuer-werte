@@ -114,6 +114,24 @@ footer{
    APP-SPEZIFISCHES CSS
    ═══════════════════════════════════════════════════════════════ */
 
+/* Steuerart-Umschalter (Top-Level) */
+.steuerart-bar{
+  display:flex;gap:0;margin-bottom:18px;width:fit-content;
+}
+.steuerart-btn{
+  padding:9px 28px;background:transparent;
+  border:1px solid var(--border);border-right:none;
+  color:var(--text-muted);font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;
+}
+.steuerart-btn:last-child{border-right:1px solid var(--border);}
+.steuerart-btn:hover{border-color:var(--accent);color:var(--accent);z-index:1;position:relative;}
+.steuerart-btn.active{
+  background:var(--accent-dim);border-color:var(--accent);
+  color:var(--accent);z-index:1;position:relative;
+}
+.steuerart-btn.active + .steuerart-btn{border-left-color:var(--accent);}
+
 /* Jahr-Umschalter */
 .year-bar{
   display:flex;gap:0;margin-bottom:24px;width:fit-content;
@@ -145,6 +163,7 @@ footer{
 .filter-bar{
   display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;
 }
+.filter-bar.hidden{display:none;}
 .filter-btn{
   padding:6px 16px;background:transparent;border:1px solid var(--border);
   color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:10px;
@@ -264,6 +283,12 @@ footer{
     <p class="subtitle"><span id="vz-subtitle">Veranlagungszeitraum 2026</span> · Übersicht für Berater &amp; Mandanten</p>
   </header>
 
+  <!-- STEUERART-UMSCHALTER -->
+  <div class="steuerart-bar">
+    <button class="steuerart-btn active" id="steuerart-btn-est" onclick="switchSteuerart('est',this)">Einkommensteuer</button>
+    <button class="steuerart-btn" id="steuerart-btn-ust" onclick="switchSteuerart('ust',this)">Umsatzsteuer</button>
+  </div>
+
   <!-- JAHR-UMSCHALTER -->
   <div class="year-bar" id="year-bar"><!-- wird per JS gerendert --></div>
 
@@ -272,19 +297,27 @@ footer{
     Hinweis: Die Werte für dieses Veranlagungsjahr wurden noch nicht vollständig geprüft und sind vorläufige Schätzungen. Bitte vor Verwendung verifizieren.
   </div>
 
-  <!-- FILTER -->
-  <div class="filter-bar">
+  <!-- FILTER · ESt -->
+  <div class="filter-bar" data-steuerart="est">
     <button class="filter-btn active" onclick="filterSection('alle',this)">Alle</button>
     <button class="filter-btn" onclick="filterSection('freibetraege',this)">Freibeträge</button>
     <button class="filter-btn" onclick="filterSection('werbungskosten',this)">Werbungskosten</button>
     <button class="filter-btn" onclick="filterSection('vorsorge',this)">Vorsorge</button>
     <button class="filter-btn" onclick="filterSection('sonderausgaben',this)">Sonderausgaben</button>
     <button class="filter-btn" onclick="filterSection('kenngroessen',this)">Kenngrößen</button>
-    <button class="filter-btn" onclick="filterSection('umsatzsteuer',this)">Umsatzsteuer</button>
+  </div>
+
+  <!-- FILTER · USt -->
+  <div class="filter-bar hidden" data-steuerart="ust">
+    <button class="filter-btn active" onclick="filterSection('alle',this)">Alle</button>
+    <button class="filter-btn" onclick="filterSection('saetze',this)">Steuersätze</button>
+    <button class="filter-btn" onclick="filterSection('grenzen',this)">Unternehmergrenzen</button>
+    <button class="filter-btn" onclick="filterSection('voranmeldung',this)">Voranmeldung</button>
+    <button class="filter-btn" onclick="filterSection('grenzueberschreitend',this)">Grenzüberschreitend</button>
   </div>
 
   <!-- I. FREIBETRÄGE -->
-  <div class="section-block" data-section="freibetraege">
+  <div class="section-block" data-steuerart="est" data-section="freibetraege">
     <div class="section-card">
       <div class="card-title">I · Grund- und Kinderfreibeträge</div>
       <table class="data-table">
@@ -318,7 +351,7 @@ footer{
   </div>
 
   <!-- II. WERBUNGSKOSTEN -->
-  <div class="section-block" data-section="werbungskosten">
+  <div class="section-block" data-steuerart="est" data-section="werbungskosten">
     <div class="section-card">
       <div class="card-title">II · Werbungskosten &amp; Pauschbeträge</div>
       <table class="data-table">
@@ -371,7 +404,7 @@ footer{
   </div>
 
   <!-- III. VORSORGEAUFWENDUNGEN -->
-  <div class="section-block" data-section="vorsorge">
+  <div class="section-block" data-steuerart="est" data-section="vorsorge">
     <div class="section-card">
       <div class="card-title">III · Vorsorgeaufwendungen · § 10 EStG</div>
       <table class="data-table">
@@ -409,7 +442,7 @@ footer{
   </div>
 
   <!-- IV. SONDERAUSGABEN -->
-  <div class="section-block" data-section="sonderausgaben">
+  <div class="section-block" data-steuerart="est" data-section="sonderausgaben">
     <div class="section-card">
       <div class="card-title">IV · Sonderausgaben &amp; Außergewöhnliche Belastungen</div>
       <table class="data-table">
@@ -447,7 +480,7 @@ footer{
   </div>
 
   <!-- V. KENNGROSSEN -->
-  <div class="section-block" data-section="kenngroessen">
+  <div class="section-block" data-steuerart="est" data-section="kenngroessen">
     <div class="section-card">
       <div class="card-title">V · Wichtige Kenngrößen &amp; Besonderheiten <span data-val="year">2026</span></div>
       <div class="kenn-grid">
@@ -470,15 +503,15 @@ footer{
     </div>
   </div>
 
-  <!-- VI. UMSATZSTEUER -->
-  <div class="section-block" data-section="umsatzsteuer">
+  <!-- I. USt · STEUERSÄTZE -->
+  <div class="section-block" data-steuerart="ust" data-section="saetze">
     <div class="section-card">
-      <div class="card-title">VI · Umsatzsteuer (UStG) <span data-val="year">2026</span></div>
+      <div class="card-title">I · Steuersätze <span data-val="year">2026</span></div>
       <table class="data-table">
         <thead>
           <tr>
             <th style="width:40%">Bezeichnung</th>
-            <th>Betrag / Satz</th>
+            <th>Satz</th>
             <th>Rechtsgrundlage</th>
           </tr>
         </thead>
@@ -493,6 +526,24 @@ footer{
             <td><span class="val-primary">7 %</span></td>
             <td><span class="val-note">§ 12 Abs. 2 UStG</span></td>
           </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- II. USt · UNTERNEHMERGRENZEN -->
+  <div class="section-block" data-steuerart="ust" data-section="grenzen">
+    <div class="section-card">
+      <div class="card-title">II · Unternehmergrenzen <span data-val="year">2026</span></div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:40%">Bezeichnung</th>
+            <th>Grenzwert</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
           <tr class="highlight-row">
             <td class="label">Kleinunternehmergrenze<small data-val="ust_ku_sub">Vorjahr / laufendes Jahr</small></td>
             <td><span class="val-primary" data-val="ust_ku">25.000 € / 100.000 €</span></td>
@@ -503,18 +554,65 @@ footer{
             <td><span class="val-primary" data-val="ust_ist">800.000 €</span></td>
             <td><span class="val-note">§ 20 UStG</span></td>
           </tr>
+        </tbody>
+      </table>
+      <p class="note" data-val="ust_hint">Kleinunternehmer: echte Steuerbefreiung seit 01.01.2025; bei unterjährigem Überschreiten der 100.000 € sofortige Regelbesteuerung ab diesem Umsatz.</p>
+    </div>
+  </div>
+
+  <!-- III. USt · VORANMELDUNG -->
+  <div class="section-block" data-steuerart="ust" data-section="voranmeldung">
+    <div class="section-card">
+      <div class="card-title">III · Voranmeldung · § 18 UStG <span data-val="year">2026</span></div>
+      <table class="data-table">
+        <thead>
           <tr>
-            <td class="label">Voranmeldung — monatlich<small>USt-Zahllast Vorjahr übersteigt</small></td>
+            <th style="width:40%">Bezeichnung</th>
+            <th>Grenzwert</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Monatliche Voranmeldung<small>USt-Zahllast Vorjahr übersteigt</small></td>
             <td><span class="val-primary" data-val="ust_va_monat">9.000 €</span></td>
-            <td><span class="val-note">§ 18 Abs. 2 UStG</span></td>
+            <td><span class="val-note">§ 18 Abs. 2 S. 2 UStG</span></td>
           </tr>
           <tr>
-            <td class="label">Voranmeldung — Befreiung<small>USt-Zahllast Vorjahr nicht mehr als</small></td>
+            <td class="label">Vierteljährliche Voranmeldung<small>Standardfall unterhalb Monatsgrenze</small></td>
+            <td><span class="val-primary" data-val="ust_va_quartal">bis 9.000 €</span></td>
+            <td><span class="val-note">§ 18 Abs. 2 S. 1 UStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Befreiung von der Voranmeldung<small>USt-Zahllast Vorjahr nicht mehr als</small></td>
             <td><span class="val-primary" data-val="ust_va_befreiung">2.000 €</span></td>
             <td><span class="val-note">§ 18 Abs. 2 S. 3 UStG</span></td>
           </tr>
           <tr>
-            <td class="label">OSS-Schwelle<small>Innergemeinschaftlicher Fernverkauf B2C</small></td>
+            <td class="label">Dauerfristverlängerung — Sondervorauszahlung</td>
+            <td><span class="val-primary">1/11</span><span class="val-note">der USt-Vorauszahlungen des Vorjahres</span></td>
+            <td><span class="val-note">§§ 46–48 UStDV</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- IV. USt · GRENZÜBERSCHREITEND -->
+  <div class="section-block" data-steuerart="ust" data-section="grenzueberschreitend">
+    <div class="section-card">
+      <div class="card-title">IV · Grenzüberschreitende Umsätze <span data-val="year">2026</span></div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:40%">Bezeichnung</th>
+            <th>Schwelle</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">OSS-Schwelle<small>Innergemeinschaftlicher Fernverkauf B2C &amp; TRFE</small></td>
             <td><span class="val-primary">10.000 €</span></td>
             <td><span class="val-note">§ 3c Abs. 4 UStG</span></td>
           </tr>
@@ -525,7 +623,6 @@ footer{
           </tr>
         </tbody>
       </table>
-      <p class="note" data-val="ust_hint">Kleinunternehmer: echte Steuerbefreiung seit 01.01.2025; bei unterjährigem Überschreiten der 100.000 € sofortige Regelbesteuerung ab diesem Umsatz.</p>
     </div>
   </div>
 
@@ -570,6 +667,7 @@ var TAX_DATA = {
     ust_ku_sub: 'Vorjahr / laufendes Jahr',
     ust_ist: '800.000 €',
     ust_va_monat: '9.000 €',
+    ust_va_quartal: 'bis 9.000 €',
     ust_va_befreiung: '2.000 €',
     ust_hint: 'Kleinunternehmer: echte Steuerbefreiung seit 01.01.2025; bei unterjährigem Überschreiten der 100.000 € sofortige Regelbesteuerung ab diesem Umsatz.',
   },
@@ -601,6 +699,7 @@ var TAX_DATA = {
     ust_ku_sub: 'Vorjahr / laufendes Jahr · Neuregelung ab 01.01.2025',
     ust_ist: '800.000 €',
     ust_va_monat: '9.000 €',
+    ust_va_quartal: 'bis 9.000 €',
     ust_va_befreiung: '2.000 €',
     ust_hint: 'Kleinunternehmer: echte Steuerbefreiung seit 01.01.2025 (§ 4 Nr. 8 ff. Verweis aus § 19); bei unterjährigem Überschreiten der 100.000 € sofortige Regelbesteuerung ab diesem Umsatz.',
   },
@@ -632,6 +731,7 @@ var TAX_DATA = {
     ust_ku_sub: 'Vorjahr / voraussichtlich laufendes Jahr (alte Regelung bis 31.12.2024)',
     ust_ist: '800.000 €',
     ust_va_monat: '7.500 €',
+    ust_va_quartal: 'bis 7.500 €',
     ust_va_befreiung: '1.000 €',
     ust_hint: 'Ist-Versteuerungsgrenze ab 2024 durch Wachstumschancengesetz von 600.000 € auf 800.000 € erhöht. Kleinunternehmerregelung bis 31.12.2024: unechte Steuerbefreiung mit Umsatzgrenzen 22.000 € / 50.000 €.',
   }
@@ -711,21 +811,55 @@ function setTheme(t) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   FILTER
+   STEUERART (Top-Level)
    ═══════════════════════════════════════════════════════════════ */
-function filterSection(cat, el) {
-  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
-  el.classList.add('active');
-  var blocks = document.querySelectorAll('.section-block');
-  blocks.forEach(function(block) {
-    if (cat === 'alle') {
+function switchSteuerart(art, el) {
+  document.querySelectorAll('.steuerart-btn').forEach(function(b){ b.classList.remove('active'); });
+  if (el) el.classList.add('active');
+
+  // Passende Filter-Leiste einblenden
+  document.querySelectorAll('.filter-bar').forEach(function(bar) {
+    if (bar.dataset.steuerart === art) {
+      bar.classList.remove('hidden');
+    } else {
+      bar.classList.add('hidden');
+    }
+  });
+
+  // Sektionen der aktiven Steuerart zeigen, Filter auf "Alle" zurücksetzen
+  var activeBar = document.querySelector('.filter-bar[data-steuerart="' + art + '"]');
+  if (activeBar) {
+    activeBar.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    var firstBtn = activeBar.querySelector('.filter-btn');
+    if (firstBtn) firstBtn.classList.add('active');
+  }
+  document.querySelectorAll('.section-block').forEach(function(block) {
+    if (block.dataset.steuerart === art) {
       block.classList.remove('hidden');
     } else {
-      if (block.dataset.section === cat) {
-        block.classList.remove('hidden');
-      } else {
-        block.classList.add('hidden');
-      }
+      block.classList.add('hidden');
+    }
+  });
+
+  try { localStorage.setItem('selected-steuerart', art); } catch(e) {}
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FILTER (innerhalb einer Steuerart)
+   ═══════════════════════════════════════════════════════════════ */
+function filterSection(cat, el) {
+  var bar = el.closest('.filter-bar');
+  var art = bar ? bar.dataset.steuerart : null;
+
+  bar.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  el.classList.add('active');
+
+  var selector = art ? '.section-block[data-steuerart="' + art + '"]' : '.section-block';
+  document.querySelectorAll(selector).forEach(function(block) {
+    if (cat === 'alle' || block.dataset.section === cat) {
+      block.classList.remove('hidden');
+    } else {
+      block.classList.add('hidden');
     }
   });
 }
@@ -745,6 +879,11 @@ function filterSection(cat, el) {
   try { savedYear = parseInt(localStorage.getItem('selected-year')); } catch(e) {}
   var initialYear = (savedYear && years.indexOf(savedYear) !== -1) ? savedYear : years[0];
   switchYear(initialYear);
+
+  var savedArt = 'est';
+  try { savedArt = localStorage.getItem('selected-steuerart') || 'est'; } catch(e) {}
+  if (savedArt !== 'est' && savedArt !== 'ust') savedArt = 'est';
+  switchSteuerart(savedArt, document.getElementById('steuerart-btn-' + savedArt));
 })();
 </script>
 </body>
