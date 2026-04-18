@@ -258,13 +258,18 @@ footer{
   .section-card{padding:18px 14px;}
   .filter-bar{gap:6px;}
   .steuerart-bar{width:100%;flex-wrap:wrap;}
-  .steuerart-btn{flex:1 1 auto;padding:8px 14px;font-size:10px;letter-spacing:1.5px;}
+  .steuerart-btn{flex:1 1 auto;padding:7px 10px;font-size:9px;letter-spacing:1px;}
   .year-bar{width:100%;}
   .year-btn{flex:1 1 auto;padding:7px 10px;font-size:12px;text-align:center;}
-  .data-table{table-layout:auto;}
-  .data-table td,.data-table th{font-size:11px;}
+  .data-table{table-layout:fixed;width:100%;}
+  .data-table th{font-size:8px;letter-spacing:1.5px;white-space:normal;word-break:break-word;padding-bottom:8px;}
+  .data-table td,.data-table td.label{font-size:11px;}
+  .data-table td.label{padding-right:8px;}
+  .data-table td.label small{font-size:10px;}
   .data-table td:not(:first-child){white-space:normal;word-break:break-word;}
-  .data-table td.label{padding-right:10px;}
+  /* Rechtsgrundlage-Spalte auf Mobile ausblenden */
+  .data-table:not(.keep-all-cols) th:last-child,
+  .data-table:not(.keep-all-cols) td:last-child{display:none;}
   .val-primary{font-size:12px;}
   .val-note{max-width:100%;font-size:9px;line-height:1.4;}
   .kenn-grid{grid-template-columns:1fr;gap:10px;}
@@ -362,12 +367,12 @@ footer{
   <div class="section-block" data-steuerart="est" data-section="freibetraege">
     <div class="section-card">
       <div class="card-title">I · Grund- und Kinderfreibeträge</div>
-      <table class="data-table">
+      <table class="data-table keep-all-cols">
         <thead>
           <tr>
             <th style="width:42%">Kategorie</th>
-            <th>Einzelveranlagung</th>
-            <th>Zusammenveranlagung</th>
+            <th>Einzel&shy;veranlagung</th>
+            <th>Zusammen&shy;veranlagung</th>
           </tr>
         </thead>
         <tbody>
@@ -1043,23 +1048,23 @@ footer{
         <thead>
           <tr>
             <th style="width:42%">Fahrzeugtyp</th>
-            <th>Bemessungsgrundlage (BMG)</th>
+            <th>BMG · 1 % monatlich</th>
             <th>Rechtsgrundlage</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="label">Verbrenner / Sonstige<small>Monatlicher Ansatz: 1 % der BMG</small></td>
+            <td class="label">Verbrenner / Sonstige</td>
             <td><span class="val-primary">Volles BLP</span></td>
             <td><span class="val-note">§ 6 Abs. 1 Nr. 4 S. 2 EStG</span></td>
           </tr>
           <tr>
-            <td class="label">Plug-in-Hybrid (PHEV)<small>Mind. 50 km E-Reichweite oder ≤ 50 g CO₂ / km · Monatlicher Ansatz: 1 % der BMG</small></td>
+            <td class="label">Plug-in-Hybrid (PHEV)<small>Mind. 50 km E-Reichweite oder ≤ 50 g CO₂ / km</small></td>
             <td><span class="val-primary">1/2 des BLP</span></td>
             <td><span class="val-note">§ 6 Abs. 1 Nr. 4 S. 3 Nr. 3 EStG</span></td>
           </tr>
           <tr>
-            <td class="label">Batterieelektrisch (BEV)<small>BLP bis <span data-val="bev_blp_grenze">100.000 €</span> · Monatlicher Ansatz: 1 % der BMG</small></td>
+            <td class="label">Batterieelektrisch (BEV)<small>BLP bis <span data-val="bev_blp_grenze">100.000 €</span></small></td>
             <td><span class="val-primary">1/4 des BLP</span></td>
             <td><span class="val-note">§ 6 Abs. 1 Nr. 4 S. 3 Nr. 1 EStG</span></td>
           </tr>
