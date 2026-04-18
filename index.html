@@ -330,6 +330,7 @@ footer{
     <button class="filter-btn" onclick="filterSection('lohn-grundwerte',this)">Grundwerte</button>
     <button class="filter-btn" onclick="filterSection('lohn-sachbezuege',this)">Sachbezüge &amp; Reisekosten</button>
     <button class="filter-btn" onclick="filterSection('lohn-bav',this)">bAV &amp; VL</button>
+    <button class="filter-btn" onclick="filterSection('lohn-dienstwagen',this)">Dienstwagen</button>
   </div>
 
   <!-- FILTER · USt -->
@@ -859,12 +860,12 @@ footer{
           </tr>
           <tr>
             <td class="label">Verpflegungsmehraufwand<small>Ab 8 Stunden Abwesenheit</small></td>
-            <td><span class="val-primary">16 € / Tag</span></td>
+            <td><span class="val-primary">14 € / Tag</span></td>
             <td><span class="val-note">§ 9 Abs. 4a EStG</span></td>
           </tr>
           <tr>
             <td class="label">Verpflegungsmehraufwand<small>Ab 24 Stunden Abwesenheit (Ganztag)</small></td>
-            <td><span class="val-primary">32 € / Tag</span></td>
+            <td><span class="val-primary">28 € / Tag</span></td>
             <td><span class="val-note">§ 9 Abs. 4a EStG</span></td>
           </tr>
           <tr>
@@ -1034,6 +1035,45 @@ footer{
     </div>
   </div>
 
+  <!-- IV. LOHN · DIENSTWAGEN -->
+  <div class="section-block hidden" data-steuerart="lohn" data-section="lohn-dienstwagen">
+    <div class="section-card">
+      <div class="card-title">IV · Dienstwagen · 1 %-Regelung <span data-val="year">2026</span></div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:42%">Fahrzeugtyp</th>
+            <th>Bemessungsgrundlage (BMG)</th>
+            <th>Rechtsgrundlage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Verbrenner / Sonstige<small>Monatlicher Ansatz: 1 % der BMG</small></td>
+            <td><span class="val-primary">Volles BLP</span></td>
+            <td><span class="val-note">§ 6 Abs. 1 Nr. 4 S. 2 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Plug-in-Hybrid (PHEV)<small>Mind. 50 km E-Reichweite oder ≤ 50 g CO₂ / km · Monatlicher Ansatz: 1 % der BMG</small></td>
+            <td><span class="val-primary">1/2 des BLP</span></td>
+            <td><span class="val-note">§ 6 Abs. 1 Nr. 4 S. 3 Nr. 3 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Batterieelektrisch (BEV)<small>BLP bis <span data-val="bev_blp_grenze">100.000 €</span> · Monatlicher Ansatz: 1 % der BMG</small></td>
+            <td><span class="val-primary">1/4 des BLP</span></td>
+            <td><span class="val-note">§ 6 Abs. 1 Nr. 4 S. 3 Nr. 1 EStG</span></td>
+          </tr>
+          <tr>
+            <td class="label">Batterieelektrisch (BEV)<small>BLP über <span data-val="bev_blp_grenze">100.000 €</span></small></td>
+            <td><span class="val-primary">1/2 des BLP</span></td>
+            <td><span class="val-note">§ 6 Abs. 1 Nr. 4 S. 3 Nr. 2 EStG</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">Fahrten Wohnung–Arbeitsstätte: zusätzlich 0,03 % der BMG × Entfernung (km) monatlich · alternativ Einzelnachweis (0,002 % × Fahrten × km)</p>
+    </div>
+  </div>
+
   <!-- DISCLAIMER -->
   <p class="disclaimer">Alle Angaben basieren auf dem zuletzt geprüften Rechtsstand und beziehen sich auf die dargestellten Veranlagungszeiträume 2024–2026. Jahresunabhängige Werte (z. B. KSt, GewSt) gelten vorbehaltlich gesetzlicher Änderungen. Individuelle Faktoren (z. B. Kirchensteuer, besondere Einkunftsarten) bleiben unberücksichtigt. Kein Ersatz für individuelle Steuerberatung · Alle Angaben ohne Gewähr</p>
 
@@ -1093,6 +1133,7 @@ var TAX_DATA = {
     sachbezug_fruehstueck: '2,30 € / Tag',
     bav_steuer: '8.064 € / Jahr',
     bav_sv: '4.032 € / Jahr',
+    bev_blp_grenze: '100.000 €',
     gewst_grundbesitz: 'Tatsächliche Grundsteuer',
     gewst_grundbesitz_sub: 'Im Erhebungszeitraum als Betriebsausgabe erfasste Grundsteuer für Grundbesitz des Betriebsvermögens',
     gewst_grundbesitz_note: '',
@@ -1144,6 +1185,7 @@ var TAX_DATA = {
     sachbezug_fruehstueck: '2,30 € / Tag',
     bav_steuer: '7.728 € / Jahr',
     bav_sv: '3.864 € / Jahr',
+    bev_blp_grenze: '100.000 €',
     gewst_grundbesitz: 'Tatsächliche Grundsteuer',
     gewst_grundbesitz_sub: 'Im Erhebungszeitraum als Betriebsausgabe erfasste Grundsteuer für Grundbesitz des Betriebsvermögens',
     gewst_grundbesitz_note: 'Gilt ab 01.01.2025 · zuvor 1,2 % des Einheitswerts',
@@ -1195,6 +1237,7 @@ var TAX_DATA = {
     sachbezug_fruehstueck: '2,17 € / Tag',
     bav_steuer: '7.248 € / Jahr',
     bav_sv: '3.624 € / Jahr',
+    bev_blp_grenze: '70.000 €',
     gewst_grundbesitz: '1,2 % des Einheitswerts',
     gewst_grundbesitz_sub: 'Einheitswert × Anpassungsfaktor: 140 % (alte Bundesländer) · 400 % (neue Bundesländer)',
     gewst_grundbesitz_note: 'Alte Rechtslage bis 31.12.2024 · ab 2025 tatsächliche Grundsteuer',
