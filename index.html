@@ -327,6 +327,7 @@ footer{
     <button class="filter-btn" onclick="filterSection('werbungskosten',this)">Werbungskosten</button>
     <button class="filter-btn" onclick="filterSection('vorsorge',this)">Vorsorge</button>
     <button class="filter-btn" onclick="filterSection('sonderausgaben',this)">Sonderausgaben</button>
+    <button class="filter-btn" onclick="filterSection('grenzgaenger',this)">Grenzgänger</button>
     <button class="filter-btn" onclick="filterSection('kenngroessen',this)">Kenngrößen</button>
   </div>
 
@@ -616,6 +617,30 @@ footer{
         </tbody>
       </table>
       <p class="note">Beträge gelten seit 2021 unverändert. Übertragung auf Eltern möglich (§ 33b Abs. 5 EStG), soweit das Kind den Pauschbetrag nicht selbst in Anspruch nimmt.</p>
+    </div>
+  </div>
+
+  <!-- IV c. GRENZGÄNGER / ANLAGE N-Gre -->
+  <div class="section-block" data-steuerart="est" data-section="grenzgaenger">
+    <div class="section-card">
+      <div class="card-title">IV c · Umrechnungskurse · Anlage N-Gre <span data-val="year">2026</span></div>
+      <table class="data-table keep-all-cols">
+        <thead>
+          <tr>
+            <th style="width:42%">Währung / Land</th>
+            <th>Jahresdurchschnittskurs</th>
+            <th>Rechtsgrundlage / Quelle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Schweizer Franken (CHF)<small data-val="chf_kurs_sub">DBA Deutschland–Schweiz · Art. 15a</small></td>
+            <td><span class="val-primary" data-val="chf_kurs">1 CHF = 1,0669 €</span></td>
+            <td><span class="val-note">BMF-Jahresdurchschnittskurs · § 256 HGB analog</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note" data-val="chf_kurs_note">Jahresdurchschnittskurs gem. BMF-Schreiben. Maßgeblich für die Umrechnung von CHF-Arbeitslohn in EUR bei der Veranlagung (Anlage N-Gre). Bitte gegen das aktuelle BMF-Schreiben verifizieren.</p>
     </div>
   </div>
 
@@ -1325,6 +1350,9 @@ var TAX_DATA = {
     soli: '20.350 € / 40.700 €',
     dhf_ausland: '2.000 € / Monat',
     dhf_ausland_sub: 'Deckelung der abzugsfähigen Unterkunftskosten im Ausland',
+    chf_kurs: 'noch nicht verfügbar',
+    chf_kurs_sub: 'DBA Deutschland–Schweiz · Art. 15a · VZ 2026',
+    chf_kurs_note: 'BMF-Jahresdurchschnittskurs 2026 wird erst nach Ablauf des Kalenderjahres veröffentlicht. Bis dahin können monatliche BMF-Kurse oder der Vorjahreskurs (ca. 1,0669 €) als Anhaltspunkt herangezogen werden.',
     minijob: '603 € / Monat',
     minijob_sub: '§ 8 Abs. 1a SGB IV · dynamisch an Mindestlohn gekoppelt (Mindestlohn × 130 / 3)',
     mindestlohn: '13,90 € / Stunde',
@@ -1377,6 +1405,9 @@ var TAX_DATA = {
     soli: '19.950 € / 39.900 €',
     dhf_ausland: 'Keine Obergrenze',
     dhf_ausland_sub: 'Kein fester Höchstbetrag – Angemessenheitsprüfung; 60-qm-Regel des FA nicht anwendbar (BFH v. 9.8.2023, Az. VI R 30/21)',
+    chf_kurs: '1 CHF = 1,0669 €',
+    chf_kurs_sub: 'DBA Deutschland–Schweiz · Art. 15a · VZ 2025',
+    chf_kurs_note: 'Jahresdurchschnittskurs 2025 gem. BMF-Schreiben (ca. EUR/CHF 0,9374). Bitte gegen das aktuelle BMF-Schreiben verifizieren.',
     minijob: '556 € / Monat',
     minijob_sub: '§ 8 Abs. 1a SGB IV · dynamisch an Mindestlohn gekoppelt (Mindestlohn × 130 / 3)',
     mindestlohn: '12,82 € / Stunde',
@@ -1429,6 +1460,9 @@ var TAX_DATA = {
     soli: '18.130 € / 36.260 €',
     dhf_ausland: 'Keine Obergrenze',
     dhf_ausland_sub: 'Kein fester Höchstbetrag – Angemessenheitsprüfung; 60-qm-Regel des FA nicht anwendbar (BFH v. 9.8.2023, Az. VI R 30/21)',
+    chf_kurs: '1 CHF = 1,0578 €',
+    chf_kurs_sub: 'DBA Deutschland–Schweiz · Art. 15a · VZ 2024',
+    chf_kurs_note: 'Jahresdurchschnittskurs 2024 gem. BMF-Schreiben (ca. EUR/CHF 0,9454). Bitte gegen das aktuelle BMF-Schreiben verifizieren.',
     minijob: '538 € / Monat',
     minijob_sub: '§ 8 Abs. 1a SGB IV · dynamisch an Mindestlohn gekoppelt (Mindestlohn × 130 / 3)',
     mindestlohn: '12,41 € / Stunde',
