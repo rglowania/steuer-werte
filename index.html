@@ -324,6 +324,7 @@ footer{
   <div class="filter-bar" data-steuerart="est">
     <button class="filter-btn active" onclick="filterSection('alle',this)">Alle</button>
     <button class="filter-btn" onclick="filterSection('freibetraege',this)">Freibeträge</button>
+    <button class="filter-btn" onclick="filterSection('tarif',this)">Tarif</button>
     <button class="filter-btn" onclick="filterSection('grenzgaenger',this)">Grenzgänger</button>
     <button class="filter-btn" onclick="filterSection('werbungskosten',this)">Werbungskosten</button>
     <button class="filter-btn" onclick="filterSection('vorsorge',this)">Vorsorge</button>
@@ -411,7 +412,51 @@ footer{
     </div>
   </div>
 
-  <!-- II. GRENZGÄNGER / ANLAGE N-Gre -->
+  <!-- II. ESt-TARIF -->
+  <div class="section-block" data-steuerart="est" data-section="tarif">
+    <div class="section-card">
+      <div class="card-title">II · Einkommensteuertarif · § 32a EStG <span data-val="year">2026</span></div>
+      <table class="data-table keep-all-cols">
+        <thead>
+          <tr>
+            <th style="width:42%">Zone</th>
+            <th>Grenzsteuersatz</th>
+            <th>ZvE ab (Einzelveranlagung)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Grundfreibetrag<small>Steuerfreies Existenzminimum</small></td>
+            <td><span class="val-primary">0 %</span></td>
+            <td><span class="val-primary">bis <span data-val="grundfreibetrag_e">12.348 €</span></span></td>
+          </tr>
+          <tr>
+            <td class="label">Progressionszone I<small>Anstieg 14 % → 24 %</small></td>
+            <td><span class="val-primary">14 – 24 %</span></td>
+            <td><span class="val-primary" data-val="est_prog1_ab">12.349 €</span></td>
+          </tr>
+          <tr>
+            <td class="label">Progressionszone II<small>Anstieg 24 % → 42 %</small></td>
+            <td><span class="val-primary">24 – 42 %</span></td>
+            <td><span class="val-primary" data-val="est_prog2_ab">17.809 €</span></td>
+          </tr>
+          <tr>
+            <td class="label">Spitzensteuersatz<small>§ 32a Abs. 1 Nr. 4 EStG</small></td>
+            <td><span class="val-primary">42 %</span></td>
+            <td><span class="val-primary" data-val="est_spitzen_ab">69.799 €</span></td>
+          </tr>
+          <tr>
+            <td class="label">Reichensteuer<small>§ 32a Abs. 1 Nr. 5 EStG</small></td>
+            <td><span class="val-primary">45 %</span></td>
+            <td><span class="val-primary">277.826 €</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">ZvE = zu versteuerndes Einkommen · Zusammenveranlagung: alle Schwellen × 2 · Sätze ohne Solidaritätszuschlag und Kirchensteuer · Zonengrenzen für 2025/2026 bitte gem. § 32a EStG i.d.g.F. prüfen</p>
+    </div>
+  </div>
+
+  <!-- III. GRENZGÄNGER / ANLAGE N-Gre -->
   <div class="section-block" data-steuerart="est" data-section="grenzgaenger">
     <div class="section-card">
       <div class="card-title">II · Umrechnungskurse · Anlage N-Gre <span data-val="year">2026</span></div>
@@ -1309,7 +1354,7 @@ footer{
 
 </div>
 
-<footer>© Robin Glowania · Zuletzt aktualisiert: 18.04.2026</footer>
+<footer>© Robin Glowania · Zuletzt aktualisiert: 20.04.2026</footer>
 
 <script>
 /* ═══════════════════════════════════════════════════════════════
@@ -1334,6 +1379,9 @@ var TAX_DATA = {
     entf_note: 'Gilt ab dem 1. Kilometer',
     uebungsleiter: '3.300 €',
     ehrenamt: '960 €',
+    est_prog1_ab: '12.349 €',
+    est_prog2_ab: '17.809 €',
+    est_spitzen_ab: '69.799 €',
     unterhalt: '12.348 €',
     aktivrente: '2.000 € / Monat',
     aktivrente_sub: 'Steuerfreier Arbeitslohn bei Weiterbeschäftigung nach Erreichen der Regelaltersgrenze',
@@ -1389,6 +1437,9 @@ var TAX_DATA = {
     entf_note: 'Staffelung: 0,30 € (km 1–20), 0,38 € (ab km 21)',
     uebungsleiter: '3.000 €',
     ehrenamt: '840 €',
+    est_prog1_ab: '12.097 €',
+    est_prog2_ab: '17.444 €',
+    est_spitzen_ab: '68.430 €',
     unterhalt: '12.096 €',
     aktivrente: '—',
     aktivrente_sub: 'Nicht anwendbar – gilt erst ab Veranlagungszeitraum 2026',
@@ -1444,6 +1495,9 @@ var TAX_DATA = {
     entf_note: 'Staffelung: 0,30 € (km 1–20), 0,38 € (ab km 21)',
     uebungsleiter: '3.000 €',
     ehrenamt: '840 €',
+    est_prog1_ab: '11.785 €',
+    est_prog2_ab: '17.006 €',
+    est_spitzen_ab: '66.761 €',
     unterhalt: '11.784 €',
     aktivrente: '—',
     aktivrente_sub: 'Nicht anwendbar – gilt erst ab Veranlagungszeitraum 2026',
