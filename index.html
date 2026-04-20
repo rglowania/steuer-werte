@@ -324,10 +324,10 @@ footer{
   <div class="filter-bar" data-steuerart="est">
     <button class="filter-btn active" onclick="filterSection('alle',this)">Alle</button>
     <button class="filter-btn" onclick="filterSection('freibetraege',this)">Freibeträge</button>
+    <button class="filter-btn" onclick="filterSection('grenzgaenger',this)">Grenzgänger</button>
     <button class="filter-btn" onclick="filterSection('werbungskosten',this)">Werbungskosten</button>
     <button class="filter-btn" onclick="filterSection('vorsorge',this)">Vorsorge</button>
     <button class="filter-btn" onclick="filterSection('sonderausgaben',this)">Sonderausgaben</button>
-    <button class="filter-btn" onclick="filterSection('grenzgaenger',this)">Grenzgänger</button>
     <button class="filter-btn" onclick="filterSection('kenngroessen',this)">Kenngrößen</button>
   </div>
 
@@ -407,7 +407,31 @@ footer{
     </div>
   </div>
 
-  <!-- II. WERBUNGSKOSTEN -->
+  <!-- II. GRENZGÄNGER / ANLAGE N-Gre -->
+  <div class="section-block" data-steuerart="est" data-section="grenzgaenger">
+    <div class="section-card">
+      <div class="card-title">II · Umrechnungskurse · Anlage N-Gre <span data-val="year">2026</span></div>
+      <table class="data-table keep-all-cols">
+        <thead>
+          <tr>
+            <th style="width:42%">Währung / Land</th>
+            <th>Jahresdurchschnittskurs</th>
+            <th>Rechtsgrundlage / Quelle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Schweizer Franken (CHF)<small data-val="chf_kurs_sub">DBA Deutschland–Schweiz · Art. 15a</small></td>
+            <td><span class="val-primary" data-val="chf_kurs">100 CHF = 106,50 €</span></td>
+            <td><span class="val-note">OFD BW · Jahresdurchschnittskurs</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note" data-val="chf_kurs_note">Jahresdurchschnittskurs gem. BMF-Schreiben. Maßgeblich für die Umrechnung von CHF-Arbeitslohn in EUR bei der Veranlagung (Anlage N-Gre). Bitte gegen das aktuelle BMF-Schreiben verifizieren.</p>
+    </div>
+  </div>
+
+  <!-- III. WERBUNGSKOSTEN -->
   <div class="section-block" data-steuerart="est" data-section="werbungskosten">
     <div class="section-card">
       <div class="card-title">II · Werbungskosten &amp; Pauschbeträge</div>
@@ -617,30 +641,6 @@ footer{
         </tbody>
       </table>
       <p class="note">Beträge gelten seit 2021 unverändert. Übertragung auf Eltern möglich (§ 33b Abs. 5 EStG), soweit das Kind den Pauschbetrag nicht selbst in Anspruch nimmt.</p>
-    </div>
-  </div>
-
-  <!-- IV c. GRENZGÄNGER / ANLAGE N-Gre -->
-  <div class="section-block" data-steuerart="est" data-section="grenzgaenger">
-    <div class="section-card">
-      <div class="card-title">IV c · Umrechnungskurse · Anlage N-Gre <span data-val="year">2026</span></div>
-      <table class="data-table keep-all-cols">
-        <thead>
-          <tr>
-            <th style="width:42%">Währung / Land</th>
-            <th>Jahresdurchschnittskurs</th>
-            <th>Rechtsgrundlage / Quelle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="label">Schweizer Franken (CHF)<small data-val="chf_kurs_sub">DBA Deutschland–Schweiz · Art. 15a</small></td>
-            <td><span class="val-primary" data-val="chf_kurs">100 CHF = 106,50 €</span></td>
-            <td><span class="val-note">OFD BW · Jahresdurchschnittskurs</span></td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="note" data-val="chf_kurs_note">Jahresdurchschnittskurs gem. BMF-Schreiben. Maßgeblich für die Umrechnung von CHF-Arbeitslohn in EUR bei der Veranlagung (Anlage N-Gre). Bitte gegen das aktuelle BMF-Schreiben verifizieren.</p>
     </div>
   </div>
 
