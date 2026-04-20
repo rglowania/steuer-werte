@@ -328,7 +328,6 @@ footer{
     <button class="filter-btn" onclick="filterSection('werbungskosten',this)">Werbungskosten</button>
     <button class="filter-btn" onclick="filterSection('vorsorge',this)">Vorsorge</button>
     <button class="filter-btn" onclick="filterSection('sonderausgaben',this)">Sonderausgaben</button>
-    <button class="filter-btn" onclick="filterSection('kenngroessen',this)">Kenngrößen</button>
   </div>
 
   <!-- FILTER · Lohn -->
@@ -400,6 +399,11 @@ footer{
             <td class="label">Kindergeld<small>Monatlich / jährlich pro Kind</small></td>
             <td><span class="val-primary" data-val="kindergeld">259 €</span><span class="val-note" data-val="kindergeld_jahr">3.108 € / Jahr</span></td>
             <td style="color:var(--text-muted);font-size:11px;">—</td>
+          </tr>
+          <tr>
+            <td class="label">Solidaritätszuschlag — Freigrenze<small>Der tariflichen Einkommensteuer · § 3 SolZG</small></td>
+            <td><span class="val-primary" data-val="soli_e">20.350 €</span></td>
+            <td><span class="val-primary" data-val="soli_z">40.700 €</span></td>
           </tr>
         </tbody>
       </table>
@@ -641,25 +645,6 @@ footer{
         </tbody>
       </table>
       <p class="note">Beträge gelten seit 2021 unverändert. Übertragung auf Eltern möglich (§ 33b Abs. 5 EStG), soweit das Kind den Pauschbetrag nicht selbst in Anspruch nimmt.</p>
-    </div>
-  </div>
-
-  <!-- V. KENNGROSSEN -->
-  <div class="section-block" data-steuerart="est" data-section="kenngroessen">
-    <div class="section-card">
-      <div class="card-title">V · Wichtige Kenngrößen &amp; Besonderheiten <span data-val="year">2026</span></div>
-      <div class="kenn-grid">
-        <div class="kenn-item">
-          <div class="kenn-label">Aktivrente · § 3 Nr. 21 EStG</div>
-          <div class="kenn-value" data-val="aktivrente">2.000 € / Monat</div>
-          <div class="kenn-sub" data-val="aktivrente_sub">Steuerfreier Arbeitslohn bei Weiterbeschäftigung nach Erreichen der Regelaltersgrenze</div>
-        </div>
-        <div class="kenn-item">
-          <div class="kenn-label">Solidaritätszuschlag — Freigrenze</div>
-          <div class="kenn-value" data-val="soli">20.350 € / 40.700 €</div>
-          <div class="kenn-sub">Einzel / Zusammenveranlagung · Der tariflichen Einkommensteuer</div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -947,6 +932,11 @@ footer{
             <td class="label">Jahresarbeitsentgeltgrenze<small>Schwelle für PKV-Wechsel</small></td>
             <td><span class="val-primary" data-val="jaeg_mo">6.150 € / Monat</span><span class="val-note" data-val="jaeg_jahr">73.800 € / Jahr</span></td>
             <td><span class="val-note">§ 6 Abs. 6 SGB V</span></td>
+          </tr>
+          <tr>
+            <td class="label">Aktivrente — steuerfreier Arbeitslohn<small data-val="aktivrente_sub">Weiterbeschäftigung nach Erreichen der Regelaltersgrenze</small></td>
+            <td><span class="val-primary" data-val="aktivrente">2.000 € / Monat</span></td>
+            <td><span class="val-note">§ 3 Nr. 21 EStG</span></td>
           </tr>
         </tbody>
       </table>
@@ -1347,7 +1337,7 @@ var TAX_DATA = {
     unterhalt: '12.348 €',
     aktivrente: '2.000 € / Monat',
     aktivrente_sub: 'Steuerfreier Arbeitslohn bei Weiterbeschäftigung nach Erreichen der Regelaltersgrenze',
-    soli: '20.350 € / 40.700 €',
+    soli_e: '20.350 €', soli_z: '40.700 €',
     dhf_ausland: '2.000 € / Monat',
     dhf_ausland_sub: 'Deckelung der abzugsfähigen Unterkunftskosten im Ausland',
     chf_kurs: '100 CHF ≈ 109,50 € (vorl.)',
@@ -1402,7 +1392,7 @@ var TAX_DATA = {
     unterhalt: '12.096 €',
     aktivrente: '—',
     aktivrente_sub: 'Nicht anwendbar – gilt erst ab Veranlagungszeitraum 2026',
-    soli: '19.950 € / 39.900 €',
+    soli_e: '19.950 €', soli_z: '39.900 €',
     dhf_ausland: 'Keine Obergrenze',
     dhf_ausland_sub: 'Kein fester Höchstbetrag – Angemessenheitsprüfung; 60-qm-Regel des FA nicht anwendbar (BFH v. 9.8.2023, Az. VI R 30/21)',
     chf_kurs: '100 CHF = 106,50 €',
@@ -1457,7 +1447,7 @@ var TAX_DATA = {
     unterhalt: '11.784 €',
     aktivrente: '—',
     aktivrente_sub: 'Nicht anwendbar – gilt erst ab Veranlagungszeitraum 2026',
-    soli: '18.130 € / 36.260 €',
+    soli_e: '18.130 €', soli_z: '36.260 €',
     dhf_ausland: 'Keine Obergrenze',
     dhf_ausland_sub: 'Kein fester Höchstbetrag – Angemessenheitsprüfung; 60-qm-Regel des FA nicht anwendbar (BFH v. 9.8.2023, Az. VI R 30/21)',
     chf_kurs: '100 CHF = 104,50 €',
